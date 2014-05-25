@@ -1,0 +1,177 @@
+html, body {
+  height: 100%;
+}
+
+ul, ol {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.navbar-container {
+  width: 1170px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.main {
+  min-height: 100%;
+  padding-bottom: 120px;
+}
+
+.content {
+  position: relative;
+  margin: 20px 15%;
+}
+
+.footer {
+  display: block;
+  height: 120px;
+  margin-top: -120px;
+}
+
+.intro {
+  padding-top: 140px;
+  padding-bottom: 200px;
+  margin-bottom: 30px;
+  background-color:#34495E;
+  color: #ffffff;
+}
+
+.tiles {
+  margin-bottom: 46px;
+  height: auto;
+  overflow:hidden;
+}
+
+.tile {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.form-container {
+  width: 400px;
+  margin: 40px auto;
+}
+
+.page-container {
+  display: block;
+  margin-left: auto ! important;
+  margin-right: auto ! important;
+}
+
+/* for bbs */
+.topics {
+  width: 66.6%;
+  background: #ECF0F1;
+  float: left;
+  margin-bottom: 20px;
+}
+
+.sidebar {
+  width: 33.3%;
+  padding: 0 10px;
+  float: left;
+}
+
+.topics-header {
+  background: #ECF0F1;
+  padding: 10px;
+}
+
+.topics-header .sorts {
+  text-align: right;
+  font-size: 15px;
+}
+
+.topics-header .sorts .lb {
+  text-align: right;
+}
+
+.topics-header .sorts > ul {
+  display: inline;
+  padding: 0;
+}
+
+.topics-header .sorts > ul > li {
+  display: inline;
+}
+
+.topics-header .sorts > ul > li+li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+.topics-header .sorts > ul > li > a.active {
+  text-decoration: none;
+}
+
+.topics-stream {
+  background: #ffffff;
+}
+
+.topics-stream-item {
+  border: solid 1px #ECF0F1;
+  border-top: 0;
+  padding: 10px 10px 10px 80px;
+}
+
+.topics-stream-item .avatar {
+
+}
+
+.topics-stream-item .avatar img {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin-left: -70px;
+}
+
+.topics-stream-item .title {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+.topics-stream-item .description {
+  font-size: 12px;
+}
+
+.topics-stream-item .description a {
+  color: #95A5A6;
+}
+
+.topics-stream-item .description .tag > a {
+  color: #ffffff;
+}
+
+.topics-stream-item .description span+span:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "\00b7";
+}
+
+.sidebar .box {
+  margin-top: 10px;
+  border: solid 1px #ECF0F1;
+  font-size: 15px;
+}
+
+.sidebar .box .title {
+  background: #ECF0F1;
+  padding: 5px;
+  text-align: center;
+}
+
+.sidebar .box > .content {
+  margin: 0;
+}
+
+.sidebar .box > .content li {
+}
+
+.sidebar .box > .content li:before {
+  padding: 5px;
+  content: "\00b7";
+}

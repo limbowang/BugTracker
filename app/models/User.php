@@ -6,6 +6,17 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 /**
  * User
  *
+ * @property integer $id
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ * @property boolean $is_admin
+ * @property string $avatar
+ * @property string $question
+ * @property string $answer
+ * @property string $last_login_at
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
  */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 

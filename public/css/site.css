@@ -1,121 +1,116 @@
 html, body {
-  height: 100%;
+    height: 100%;
 }
 
 ul, ol {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
 }
 
 .navbar-container {
-  width: 1170px;
-  margin-left: auto;
-  margin-right: auto;
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
 .main {
-  min-height: 100%;
-  padding-bottom: 120px;
+    min-height: 100%;
+    padding-bottom: 120px;
 }
 
 .content {
-  position: relative;
-  margin: 20px 15%;
+    position: relative;
+    margin: 20px 15%;
 }
 
 .footer {
-  display: block;
-  height: 120px;
-  margin-top: -120px;
+    display: block;
+    height: 120px;
+    margin-top: -120px;
 }
 
+/* for home page */
 .intro {
-  padding-top: 140px;
-  padding-bottom: 200px;
-  margin-bottom: 30px;
-  background-color:#34495E;
-  color: #ffffff;
+    padding-top: 140px;
+    padding-bottom: 200px;
+    margin-bottom: 30px;
+    background-color: #3498DB;
+    color: #ffffff;
 }
 
 .tiles {
-  margin-bottom: 46px;
-  height: auto;
-  overflow:hidden;
+    margin-bottom: 46px;
+    height: auto;
+    overflow: hidden;
 }
 
 .tile {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.form-container {
-  width: 400px;
-  margin: 40px auto;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .page-container {
-  display: block;
-  margin-left: auto ! important;
-  margin-right: auto ! important;
+    display: block;
+    margin-left: auto ! important;
+    margin-right: auto ! important;
 }
 
 /* for bbs */
 .topics {
-  width: 66.6%;
-  background: #ECF0F1;
-  float: left;
-  margin-bottom: 20px;
+    width: 66.6%;
+    background: #ECF0F1;
+    float: left;
+    margin-bottom: 20px;
 }
 
 .sidebar {
-  width: 33.3%;
-  padding: 0 10px;
-  float: left;
+    width: 33.3%;
+    padding: 0 10px;
+    float: left;
 }
 
 .topics-header {
-  background: #ECF0F1;
-  padding: 10px;
+    background: #ECF0F1;
+    padding: 10px;
 }
 
 .topics-header .sorts {
-  text-align: right;
-  font-size: 15px;
+    text-align: right;
+    font-size: 15px;
 }
 
 .topics-header .sorts .lb {
-  text-align: right;
+    text-align: right;
 }
 
 .topics-header .sorts > ul {
-  display: inline;
-  padding: 0;
+    display: inline;
+    padding: 0;
 }
 
 .topics-header .sorts > ul > li {
-  display: inline;
+    display: inline;
 }
 
-.topics-header .sorts > ul > li+li:before {
-  padding: 0 5px;
-  color: #ccc;
-  content: "/\00a0";
+.topics-header .sorts > ul > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
 }
 
 .topics-header .sorts > ul > li > a.active {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .topics-stream {
-  background: #ffffff;
+    background: #ffffff;
 }
 
 .topics-stream-item {
-  border: solid 1px #ECF0F1;
-  border-top: 0;
-  padding: 10px 10px 10px 80px;
+    border: solid 1px #ECF0F1;
+    border-top: 0;
+    padding: 10px 10px 10px 80px;
 }
 
 .topics-stream-item .avatar {
@@ -123,55 +118,125 @@ ul, ol {
 }
 
 .topics-stream-item .avatar img {
-  float: left;
-  width: 60px;
-  height: 60px;
-  margin-left: -70px;
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin-left: -70px;
 }
 
 .topics-stream-item .title {
-  font-size: 16px;
-  padding-bottom: 5px;
+    font-size: 16px;
+    padding-bottom: 5px;
 }
 
 .topics-stream-item .description {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .topics-stream-item .description a {
-  color: #95A5A6;
+    color: #95A5A6;
 }
 
 .topics-stream-item .description .tag > a {
-  color: #ffffff;
+    color: #ffffff;
 }
 
-.topics-stream-item .description span+span:before {
-  padding: 0 5px;
-  color: #ccc;
-  content: "\00b7";
+.topics-stream-item .description span + span:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "\00b7";
 }
 
 .sidebar .box {
-  margin-top: 10px;
-  border: solid 1px #ECF0F1;
-  font-size: 15px;
+    margin-top: 10px;
+    border: solid 1px #ECF0F1;
+    font-size: 15px;
 }
 
 .sidebar .box .title {
-  background: #ECF0F1;
-  padding: 5px;
-  text-align: center;
+    background: #ECF0F1;
+    padding: 5px;
+    text-align: center;
 }
 
 .sidebar .box > .content {
-  margin: 0;
+    margin: 0;
 }
 
 .sidebar .box > .content li {
 }
 
 .sidebar .box > .content li:before {
-  padding: 5px;
-  content: "\00b7";
+    padding: 5px;
+    content: "\00b7";
+}
+
+/* for sing in and sign up*/
+.form-container {
+    margin: 40px auto;
+    background-color: #edeff1;
+    padding: 24px 23px 20px;
+    position: relative;
+    border-radius: 6px;
+}
+
+.signin-form {
+    width: 400px;
+}
+
+.signup-form {
+    width: 500px;
+}
+
+.form-container .form-group {
+    margin-bottom: 0;
+}
+
+.form-container .control-group {
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.form-container .form-field {
+    border-color: transparent;
+    font-size: 17px;
+    text-indent: 3px;
+}
+
+.form-container .form-field:focus {
+    border-color: #1abc9c;
+}
+
+.form-container .form-field:focus + .form-field-icon {
+    color: #1abc9c;
+}
+
+.form-container .form-field-icon {
+    color: #bfc9ca;
+    font-size: 16px;
+    position: absolute;
+    right: 15px;
+    top: 3px;
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+}
+
+.form-link {
+    color: #95A5A6;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.form-container .form-group .required:before {
+    color: red;
+    content: "*";
+}
+
+.form-error-msg {
+    color: red;
+    font-size: 14px;
+    line-height: 15px;
+    height: 25px;
 }

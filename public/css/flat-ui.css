@@ -1893,7 +1893,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
     margin-right: -36px;
   }
   .navbar-collapse .navbar-nav.navbar-right:last-child > .dropdown:last-child > a {
-    border-radius: 0 6px 6px 0;
+    /*border-radius: 0 6px 6px 0;*/
   }
   .navbar-collapse .navbar-form.navbar-right:last-child {
     margin-right: -17px;

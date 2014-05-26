@@ -1141,7 +1141,7 @@ namespace {
 		 *
 		 * @param InputInterface  $input  An Input instance
 		 * @param OutputInterface $output An Output instance
-		 * @return int     0 if everything went fine, or an error code
+		 * @return int 0 if everything went fine, or an error code
 		 * @throws \Exception When doRun returns Exception
 		 * @api 
 		 * @static 
@@ -1156,7 +1156,7 @@ namespace {
 		 *
 		 * @param InputInterface  $input  An Input instance
 		 * @param OutputInterface $output An Output instance
-		 * @return int     0 if everything went fine, or an error code
+		 * @return int 0 if everything went fine, or an error code
 		 * @static 
 		 */
 		 public static function doRun($input, $output){
@@ -1225,7 +1225,7 @@ namespace {
 		/**
 		 * Sets whether to catch exceptions or not during commands execution.
 		 *
-		 * @param bool    $boolean Whether to catch exceptions or not during commands execution
+		 * @param bool $boolean Whether to catch exceptions or not during commands execution
 		 * @api 
 		 * @static 
 		 */
@@ -1337,7 +1337,7 @@ namespace {
 		 * Returns true if the command exists, false otherwise.
 		 *
 		 * @param string $name The command name or alias
-		 * @return bool    true if the command exists, false otherwise
+		 * @return bool true if the command exists, false otherwise
 		 * @api 
 		 * @static 
 		 */
@@ -1419,8 +1419,8 @@ namespace {
 		/**
 		 * Returns a text representation of the Application.
 		 *
-		 * @param string  $namespace An optional namespace name
-		 * @param bool    $raw       Whether to return raw command list
+		 * @param string $namespace An optional namespace name
+		 * @param bool   $raw       Whether to return raw command list
 		 * @return string A string representing the Application
 		 * @deprecated Deprecated since version 2.3, to be removed in 3.0.
 		 * @static 
@@ -1433,8 +1433,8 @@ namespace {
 		/**
 		 * Returns an XML representation of the Application.
 		 *
-		 * @param string  $namespace An optional namespace name
-		 * @param bool    $asDom     Whether to return a DOM or an XML string
+		 * @param string $namespace An optional namespace name
+		 * @param bool   $asDom     Whether to return a DOM or an XML string
 		 * @return string|\DOMDocument An XML string representing the Application
 		 * @deprecated Deprecated since version 2.3, to be removed in 3.0.
 		 * @static 

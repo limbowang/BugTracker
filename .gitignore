@@ -1,3 +1,4 @@
 composer.lock
 .idea/
 vendor/
+_ide_helper.php

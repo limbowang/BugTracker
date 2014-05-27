@@ -1,6 +1,6 @@
 <?php
 
-class BugController extends \BaseController {
+class BugController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -10,6 +10,14 @@ class BugController extends \BaseController {
 	public function index()
 	{
 		//
+        $page = Input::get('p');
+        $bugs = Bug::paginate(($page + 1) * self::PAGE_NUMBER);
+        $totalPage = Bug::count() / self::PAGE_NUMBER + 1;
+        $this->layout->title = '漏洞';
+        $this->layout->content = View::make('bug.index')
+            ->with('bugs', $bugs)
+            ->with('total', $totalPage)
+            ->with('page', $page);
 	}
 
 
@@ -21,6 +29,8 @@ class BugController extends \BaseController {
 	public function create()
 	{
 		//
+        $this->layout->title = '发布新漏洞';
+        $this->layout->content = View::make('bug.create');
 	}
 
 
@@ -32,6 +42,34 @@ class BugController extends \BaseController {
 	public function store()
 	{
 		//
+        $rules = array(
+            'name' => 'required|min:5|max:15|unique:bug',
+            'details' => 'required|min:10|max:255',
+            'os' => 'required|min:1|max:20',
+            'software' => 'required',
+            'level' => 'required'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('bug/create')
+                ->withErrors($validator);
+        } else {
+            // store
+            $bug = new Bug;
+            $bug->user_id = Auth::id();
+            $bug->name = Input::get('name');
+            $bug->details = Input::get('details');
+            $bug->os = Input::get('os');
+            $bug->software = Input::get('software');
+            $bug->level = Input::get('level');
+            $bug->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created bug!');
+            return Redirect::to('bug/show/' . $bug->id);
+        }
 	}
 
 
@@ -44,6 +82,9 @@ class BugController extends \BaseController {
 	public function show($id)
 	{
 		//
+        $bug = Bug::findOrFail($id);
+        $this->layout->content = View::make('bug.show')
+            ->with('bug', $bug);
 	}
 
 

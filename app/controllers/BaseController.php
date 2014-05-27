@@ -10,6 +10,8 @@ class BaseController extends Controller {
 
     protected $layout = 'layout.master';
 
+    const PAGE_NUMBER = 15;
+
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))

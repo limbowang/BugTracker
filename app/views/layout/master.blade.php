@@ -35,8 +35,6 @@
 {{ HTML::script('js/flatui-radio.js') }}
 {{ HTML::script('js/jquery.tagsinput.js') }}
 {{ HTML::script('js/jquery.placeholder.js') }}
-{{ HTML::script('js/jquery.stacktable.js') }}
-{{ HTML::script('http://vjs.zencdn.net/4.3/video.js') }}
 {{ HTML::script('js/application.js') }}
 </body>
 </html>

@@ -18,6 +18,8 @@ Route::resource('user', 'UserController', array(
 
 Route::resource('session', 'SessionController');
 
+Route::resource('bug', 'BugController');
+
 Route::get('/', array('uses' => 'HomeController@getIndex'));
 Route::get('signup', array('uses' => 'UserController@create'));
 Route::get('signin', array('uses' => 'SessionController@create'));

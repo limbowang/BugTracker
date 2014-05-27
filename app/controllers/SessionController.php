@@ -101,6 +101,7 @@ class SessionController extends \BaseController {
     public function destroy() {
         //
         Auth::logout();
+        return Redirect::intended('/');
     }
 
 

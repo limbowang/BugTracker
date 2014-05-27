@@ -3130,7 +3130,7 @@ fieldset[disabled] .twitter-typeahead .tt-hint {
   background-color: #1abc9c;
   border-color: #1abc9c;
   color: #ffffff;
-  border-width: 2px !important;
+  border-width: 5px;
   margin: 7px 2px 6px;
 }
 .pagination ul li.active > a:hover,

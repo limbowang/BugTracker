@@ -34,7 +34,7 @@ String.prototype.repeat = function(num) {
     // Custom Selects
     $("select[name='huge']").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
     $("select[name='herolist']").selectpicker({style: 'btn-primary', menuStyle: 'dropdown-inverse'});
-    $("select[name='info']").selectpicker({style: 'btn-info'});
+    $("select[name='level']").selectpicker({style: 'btn-default'});
 
     // Tooltips
     $("[data-toggle=tooltip]").tooltip("show");

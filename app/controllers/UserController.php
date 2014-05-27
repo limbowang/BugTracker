@@ -58,11 +58,11 @@ class UserController extends BaseController {
                 ->withInput(Input::except('password', 'password_confirmation'));
         } else {
             // store
-            $nerd = new User;
-            $nerd->username = Input::get('username');
-            $nerd->email = Input::get('email');
-            $nerd->password = Hash::make(Input::get('password'));
-            $nerd->save();
+            $user = new User;
+            $user->username = Input::get('username');
+            $user->email = Input::get('email');
+            $user->password = Hash::make(Input::get('password'));
+            $user->save();
 
             // redirect
             Session::flash('message', 'Successfully created nerd!');

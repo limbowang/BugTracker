@@ -24,4 +24,8 @@ class Bug extends Eloquent {
 
     protected $table = 'bug';
 
+    public function user() {
+        return $this->belongsTo('user');
+    }
+
 }

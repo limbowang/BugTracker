@@ -15,7 +15,7 @@
                     <a href="/">主页</a>
                 </li>
                 <li>
-                    <a href="#">漏洞</a>
+                    <a href="/bug">漏洞</a>
                 </li>
                 <li>
                     <a href="#">排名</a>

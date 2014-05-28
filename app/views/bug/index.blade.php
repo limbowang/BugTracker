@@ -17,10 +17,9 @@
         </thead>
         <tbody>
         @foreach ($bugs as $bug)
-        {{ var_dump($bug)}}
         <tr>
             <td>{{ $bug->created_at }}</td>
-            <td>{{ $bug->name }}</td>
+            <td>{{ HTML::link('/bug/' . $bug->id, $bug->name) }}</td>
             <td>{{ $bug->software }}</td>
             <td>{{ $bug->user->username }}</td>
         </tr>

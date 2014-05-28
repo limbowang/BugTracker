@@ -1,6 +1,19 @@
 <?php
 
+
 class BugController extends BaseController {
+
+    /**
+     * Instantiate a new UserController instance.
+     */
+    public function __construct()
+    {
+        $this->beforeFilter('auth', array('except' => array('index', 'show')));
+
+        $this->beforeFilter('csrf', array('on' => 'post'));
+
+    }
+
 
 	/**
 	 * Display a listing of the resource.
@@ -47,14 +60,17 @@ class BugController extends BaseController {
             'details' => 'required|min:10|max:255',
             'os' => 'required|min:1|max:20',
             'software' => 'required',
-            'level' => 'required'
+            'level' => 'required',
+            'tag' => 'max:50',
+            'img' => 'max:2048'
         );
 
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
             return Redirect::to('bug/create')
-                ->withErrors($validator);
+                ->withErrors($validator)
+                ->withInput();;
         } else {
             // store
             $bug = new Bug;
@@ -64,11 +80,18 @@ class BugController extends BaseController {
             $bug->os = Input::get('os');
             $bug->software = Input::get('software');
             $bug->level = Input::get('level');
+            $bug->tag = Input::get('tag');
+            // handle file upload
+            if (Input::hasFile('img')) {
+                $newFileName = str_random(40);
+                Input::file('img')->move(app_path() . '/storage/uploads', $newFileName);
+                $bug->img = $newFileName;
+            }
             $bug->save();
 
             // redirect
             Session::flash('message', 'Successfully created bug!');
-            return Redirect::to('bug/show/' . $bug->id);
+            return Redirect::to('bug/' . $bug->id);
         }
 	}
 

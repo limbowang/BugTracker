@@ -5,6 +5,8 @@
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
+
+
 {{ $bug->id }}
 
 

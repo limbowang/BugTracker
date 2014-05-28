@@ -9,25 +9,25 @@
 
 <div class="form-group">
     {{ Form::label('bug-name', '漏洞名称：', array('class' => 'control-label required')) }}
-    {{ Form::text('name', null, array('id' => 'bug-name', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
+    {{ Form::text('name', Input::old('name'), array('id' => 'bug-name', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('name')[0] or '' }}</div>
 </div>
 
 <div class="form-group">
     {{ Form::label('bug-details', '具体描述：', array('class' => 'control-label required')) }}
-    {{ Form::textarea('details', null, array('id' => 'bug-details', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
+    {{ Form::textarea('details', Input::old('details'), array('id' => 'bug-details', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('details')[0] or '' }}</div>
 </div>
 
 <div class="form-group">
     {{ Form::label('bug-os', '操作系统：', array('class' => 'control-label required')) }}
-    {{ Form::text('os', null, array('id' => 'bug-os', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
+    {{ Form::text('os', Input::old('os'), array('id' => 'bug-os', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('os')[0] or '' }}</div>
 </div>
 
 <div class="form-group">
     {{ Form::label('bug-software', '漏洞软件：', array('class' => 'control-label required')) }}
-    {{ Form::text('software', null, array('id' => 'bug-software', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
+    {{ Form::text('software', Input::old('software'), array('id' => 'bug-software', 'class' => 'form-control form-field', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('software')[0] or '' }}</div>
 </div>
 
@@ -39,7 +39,7 @@
 
 <div class="form-group">
     {{ Form::label('bug-tag', '标签：', array('class' => 'control-label')) }}
-    {{ Form::text('tags', null, array('id' => 'bug-tag', 'class' => 'tagsinput', 'placeholder' => '用户名')) }}
+    {{ Form::text('tags', Input::old('tag'), array('id' => 'bug-tag', 'class' => 'tagsinput', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('tags')[0] or '' }}</div>
 </div>
 

@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,15 +31,16 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest()) return Redirect::guest('login');
+Route::filter('auth', function () {
+    if (Auth::guest()) {
+        return Redirect::guest('signin')
+            ->with('message', '请先登录');
+    }
 });
 
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -55,9 +54,8 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) return Redirect::to('/');
 });
 
 /*
@@ -71,10 +69,27 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
+});
+
+/*
+|--------------------------------------------------------------------------
+| Admin Filter
+|--------------------------------------------------------------------------
+|
+| Admin filter is to authenticate admin permission
+|
+*/
+Route::filter('admin', function() {
+    if (Auth::guest()) {
+        return Redirect::guest('signin')
+            ->with('message', '请先登录');
+    }
+    else if (!Auth::user()->is_admin) {
+        return Redirect::intended('/')
+            ->with('message', '无权限访问');
+    }
 });

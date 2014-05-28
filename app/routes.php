@@ -24,4 +24,3 @@ Route::get('/', array('uses' => 'HomeController@getIndex'));
 Route::get('signup', array('uses' => 'UserController@create'));
 Route::get('signin', array('uses' => 'SessionController@create'));
 Route::get('logout', array('uses' => 'SessionController@destroy'));
-

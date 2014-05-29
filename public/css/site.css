@@ -113,10 +113,6 @@ ul, ol {
     padding: 10px 10px 10px 80px;
 }
 
-.topics-stream-item .avatar {
-
-}
-
 .topics-stream-item .avatar img {
     float: left;
     width: 60px;
@@ -148,9 +144,11 @@ ul, ol {
 }
 
 .sidebar .box {
-    margin-top: 10px;
-    border: solid 1px #ECF0F1;
     font-size: 15px;
+}
+
+.sidebar .box+.box {
+  margin-top: 10px;
 }
 
 .sidebar .box .title {
@@ -161,6 +159,7 @@ ul, ol {
 
 .sidebar .box > .content {
     margin: 0;
+    border: solid 1px #ECF0F1;
 }
 
 .sidebar .box > .content li {
@@ -171,9 +170,84 @@ ul, ol {
     content: "\00b7";
 }
 
-/* for sing in and sign up*/
+.topic {
+  width: 66.6%;
+  float: left;
+  margin-bottom: 20px;
+}
+
+.topic > .topic-header {
+  padding: 5px 10px;
+  background: #ECF0F1;
+}
+
+.topic > .topic-header .avatar img {
+  float: right;
+  width: 60px;
+  height: 60px;
+}
+
+.topic > .topic-header .title {
+  font-size: 24px;
+}
+
+.topic > .topic-header .description {
+  font-size: 13px;
+}
+
+.topic > .topic-content {
+  padding: 10px;
+  border: solid 1px #ECF0F1;
+  word-wrap:break-word;
+}
+
+.topic > .replies {
+  margin-top: 10px;
+  background: #ECF0F1;
+}
+
+.topic > .no-replies {
+  text-align: center;
+}
+
+.topic > .replies .reply-header {
+  padding: 5px 10px;
+}
+
+.topic > .replies .reply-list {
+
+}
+
+.topic > .replies .reply-list .reply-list-item {
+  background: #ffffff;
+  border: solid 1px #ECF0F1;
+  border-top: 0;
+  padding: 10px 10px 10px 60px;
+}
+
+.topic > .replies .reply-list .reply-list-item .avatar img {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-left: -50px;
+}
+
+.topic > .replies .reply-list .reply-list-item .title {
+  font-size: 14px;
+}
+
+.topic > .replies .reply-list .reply-list-item .title .time:before {
+  content: "·";
+}
+
+.topic > .replies .reply-list .reply-list-item .content{
+  margin: 0;
+  word-wrap:break-word;
+}
+
+/* for forms */
 .form-container {
-    margin: 40px auto;
+    margin: 20px auto;
     background-color: #edeff1;
     padding: 24px 23px 20px;
     position: relative;

@@ -48,7 +48,7 @@
     </div>
     <div class="sidebar">
         @if (Auth::check())
-        <div>
+        <div class="box">
             <a class="btn btn-warning" href="/bbs/create">发表新帖</a>
         </div>
         @endif

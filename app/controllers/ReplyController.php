@@ -29,9 +29,31 @@ class ReplyController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($id)
 	{
 		//
+        $rules = array(
+            'content' => 'required|min:2|max:255',
+//            'id' => 'required|exists:bbs_post,id'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('bbs/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $reply = new Reply;
+            $reply->content = Input::get('content');
+            $reply->user_id = Auth::id();
+            $reply->post_id = $id;
+            $reply->save();
+            // redirect
+            Session::flash('message', 'Successfully created reply!' . $id);
+            return Redirect::to('bbs/' . $id);
+        }
 	}
 
 

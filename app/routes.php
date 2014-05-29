@@ -22,6 +22,12 @@ Route::resource('bug', 'BugController');
 
 Route::resource('bbs', 'BbsController');
 
+//Route::resource('reply', 'ReplyController', array(
+//    'only' => array('store', 'update', 'delete')
+//));
+
+Route::post('bbs/{id}/reply', 'ReplyController@store');
+
 Route::get('/', array('uses' => 'HomeController@getIndex'));
 Route::get('signup', array('uses' => 'UserController@create'));
 Route::get('signin', array('uses' => 'SessionController@create'));

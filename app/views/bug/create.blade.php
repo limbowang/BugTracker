@@ -5,7 +5,7 @@
 <div class="alert alert-info">{{ Session::get('message') }}</div>
 @endif
 
-{{ Form::open(array('url' => '/bug', 'class' => 'form-container signin-form')) }}
+{{ Form::open(array('url' => '/bug', 'files' => true, 'class' => 'form-container signin-form')) }}
 
 <div class="form-group">
     {{ Form::label('bug-name', '漏洞名称：', array('class' => 'control-label required')) }}

@@ -6,8 +6,6 @@
 @endif
 
 
-
-{{ $bug->id }}
-
+{{ HTML::image('bugimage/' . $bug->img) }}
 
 @stop

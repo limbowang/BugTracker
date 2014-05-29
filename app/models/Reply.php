@@ -19,4 +19,8 @@ class Reply extends Eloquent {
 
     protected $table = 'bbs_reply';
 
+    public function user() {
+        return $this->belongsTo('user');
+    }
+
 }

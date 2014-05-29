@@ -40,12 +40,8 @@ class BbsController extends \BaseController {
 	{
 		//
         $this->layout->title = '发布新帖';
-        $topics = array();;
-        foreach(Topic::all(array('id', 'name')) as $topic) {
-            $topics[$topic->id] = $topic->name;
-        }
         $this->layout->content = View::make('bbs.create')
-            ->with('topics', $topics);
+            ->with('topics', Topic::all(array('id', 'name')));
 	}
 
 
@@ -96,9 +92,17 @@ class BbsController extends \BaseController {
         $post = Post::findOrFail($id);
         $post->read_count += 1;
         $post->save();
+        $page = Input::has('page') ? Input::get('page') : 1;
+        $replies = Reply::where('post_id', '=', $id)->paginate(self::PAGE_NUMBER);
+        foreach(Topic::all(array('id', 'name')) as $topic) {
+            $topics[$topic->id] = $topic->name;
+        }
         $this->layout->title = '讨论 | ' . $post->title;
         $this->layout->content = View::make('bbs.show')
-            ->with('post', $post);
+            ->with('post', $post)
+            ->with('replies', $replies)
+            ->with('reply_start', self::PAGE_NUMBER * ($page - 1))
+            ->with('all_topics', Topic::all());
 	}
 
 

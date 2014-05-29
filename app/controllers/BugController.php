@@ -81,9 +81,8 @@ class BugController extends BaseController {
             $bug->tag = Input::get('tag');
             // handle file upload
             if (Input::hasFile('img')) {
-                var_dump("12312");
                 $newFileName = str_random(40);
-                Input::file('img')->move(app_path() . '/storage/uploads', $newFileName);
+                Input::file('img')->move('bugimage', $newFileName);
                 $bug->img = $newFileName;
             }
             $bug->save();

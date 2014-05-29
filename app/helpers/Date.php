@@ -22,10 +22,11 @@ function time2Units($time) {
     $time -= $hour * 60 * 60;
     $minute = floor($time / 60);
     $time -= $minute * 60;
+    $second = $time;
     $elapse = '';
 
     $unitArr = array('年前' => 'year', '个月前' => 'month', '周前' => 'week', '天前' => 'day',
-        '小时前' => 'hour', '分钟前' => 'minute');
+        '小时前' => 'hour', '分钟前' => 'minute', '秒前' => 'second');
 
     foreach ($unitArr as $cn => $u) {
         if ($$u > 0) {

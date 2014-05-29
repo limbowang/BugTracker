@@ -19,4 +19,7 @@ class Comment extends Eloquent{
 
     protected $table = 'bug_comment';
 
+    public function user() {
+        return $this->belongsTo('user');
+    }
 } 

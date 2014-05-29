@@ -106,9 +106,15 @@ class BugController extends BaseController {
         $bug = Bug::findOrFail($id);
         $bug->read_count += 1;
         $bug->save();
+        $page = Input::has('page') ? Input::get('page') : 1;
+        $comments = Comment::where('bug_id', '=', $id)->paginate(self::PAGE_NUMBER);
         $this->layout->title = "漏洞 | " . $bug->name;
-        $this->layout->content = View::make('bug.show')
-            ->with('bug', $bug);
+        $this->layout->content = View::make('bug.show')->with(array(
+            'bug' => $bug,
+            'page' => $page,
+            'comments' => $comments,
+            'comment_start' =>  self::PAGE_NUMBER * ($page - 1)
+        ));
 	}
 
 

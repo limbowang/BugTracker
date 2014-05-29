@@ -28,6 +28,8 @@ Route::resource('bbs', 'BbsController');
 
 Route::post('bbs/{id}/reply', 'ReplyController@store');
 
+Route::post('bug/{id}/comment', 'CommentController@store');
+
 Route::get('/', array('uses' => 'HomeController@getIndex'));
 Route::get('signup', array('uses' => 'UserController@create'));
 Route::get('signin', array('uses' => 'SessionController@create'));

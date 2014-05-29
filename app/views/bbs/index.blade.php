@@ -28,13 +28,16 @@
             <li class="topics-stream-item">
                 <div class="avatar">
                     <a href="{{ 'user/' . $post->user->id }}">
-                        <img src="{{ $post->user->avater or  'images/exaple-image.jpg'}}" alt=""/>
+                        <img src="{{ $post->user->avater or  'images/default.jpg'}}" alt=""/>
                     </a>
                 </div>
                 <div class="title">
+                    @if ($post->is_top)
+                    <span class="tag label label-info">置顶</span>
+                    @endif
                     {{ HTML::link('/bbs/' . $post->id, $post->title) }}
                     @if (($replyCount = count($post->replies)) != 0)
-                    <span class="badge">{{ $replyCount }}</span>
+                    <span class="badge pull-right">{{ $replyCount }}</span>
                     @endif
                 </div>
                 <div class="description">

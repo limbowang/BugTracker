@@ -314,3 +314,92 @@ ul, ol {
     line-height: 15px;
     height: 25px;
 }
+
+/* for bug */
+.page-header {
+    padding-bottom: 5px;
+}
+
+.page-header .title {
+    font-size: 25px;
+}
+
+.page-header .sorts {
+    margin-top: 12px;
+    margin-left: 15px;
+    text-align: right;
+    font-size: 15px;
+}
+
+.page-header .sorts .lb {
+    text-align: right;
+}
+
+.page-header .sorts > ul {
+    display: inline;
+    padding: 0;
+}
+
+.page-header .sorts > ul > li {
+    display: inline;
+}
+
+.page-header .sorts > ul > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+
+.page-header .sorts > ul > li > a.active {
+    text-decoration: none;
+}
+
+.bug-panel {
+    width: 66.6%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.bug-panel > .comments {
+    margin-top: 10px;
+    background: #ECF0F1;
+}
+
+.bug-panel > .no-comments {
+    text-align: center;
+}
+
+.bug-panel > .comments .comment-header {
+    padding: 5px 10px;
+}
+
+.bug-panel > .comments .comment-list {
+
+}
+
+.bug-panel > .comments .comment-list .comment-list-item {
+    background: #ffffff;
+    border: solid 1px #ECF0F1;
+    border-top: 0;
+    padding: 10px 10px 10px 60px;
+}
+
+.bug-panel > .comments .comment-list .comment-list-item .avatar img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-left: -50px;
+}
+
+.bug-panel > .comments .comment-list .comment-list-item .title {
+    font-size: 14px;
+}
+
+.bug-panel > .comments .comment-list .comment-list-item .title .time:before {
+    content: "·";
+}
+
+.bug-panel > .comments .comment-list .comment-list-item .content{
+    margin: 0;
+    word-wrap:break-word;
+}

@@ -3,8 +3,29 @@
 @section('content')
 <div class="content">
     <div class="page-header">
-        <h4>Bug List</h4>
-        {{ HTML::link('/bug/create', '发布新漏洞', array('class' => 'btn btn-primary btn-lg')) }}
+        <div class="title pull-left">
+            漏洞列表
+        </div>
+        <div class="sorts pull-left">
+            <span class="lb">查看：</span>
+            <ul>
+                <li class="active">
+                    最新
+                </li>
+                <li class="">
+                    <a href="#">最热门</a>
+                </li>
+                <li class="">
+                    <a href="#">评论最多</a>
+                </li>
+            </ul>
+        </div>
+        <div class="pull-right">
+            @if (Auth::check())
+            {{ HTML::link('/bug/create', '发布新漏洞', array('class' => 'btn btn-primary')) }}
+            @endif
+        </div>
+        <div class="clearfix"></div>
     </div>
     <table class="table table-hover table-bordered">
         <thead>
@@ -26,5 +47,6 @@
         @endforeach
         </tbody>
     </table>
+    {{ $bugs->links() }}
 </div>
 @stop

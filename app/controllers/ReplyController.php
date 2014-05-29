@@ -33,8 +33,7 @@ class ReplyController extends \BaseController {
 	{
 		//
         $rules = array(
-            'content' => 'required|min:2|max:255',
-//            'id' => 'required|exists:bbs_post,id'
+            'content' => 'required|min:2|max:255'
         );
 
         $validator = Validator::make(Input::all(), $rules);

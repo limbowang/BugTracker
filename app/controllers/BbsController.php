@@ -22,7 +22,7 @@ class BbsController extends \BaseController {
 	public function index()
 	{
 		//
-        $posts = Post::paginate(self::PAGE_NUMBER);
+        $posts = Post::orderBy('is_top', 'desc')->orderBy('created_at', 'desc')->paginate(self::PAGE_NUMBER);
         $totalPage = Post::count() / self::PAGE_NUMBER + 1;
         $this->layout->title = '讨论';
         $this->layout->content = View::make('bbs.index')
@@ -40,8 +40,12 @@ class BbsController extends \BaseController {
 	{
 		//
         $this->layout->title = '发布新帖';
+        $topics = array();
+        foreach(Topic::all(array('id', 'name')) as $topic) {
+            $topics[$topic->id] = $topic->name;
+        }
         $this->layout->content = View::make('bbs.create')
-            ->with('topics', Topic::all(array('id', 'name')));
+            ->with('topics', $topics);
 	}
 
 

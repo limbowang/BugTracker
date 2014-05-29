@@ -26,6 +26,7 @@
         <div class="topic-content">
             {{$post->content}}
         </div>
+
         @if (($count = count($replies)) == 0)
         <div class="no-replies">
             没有回复

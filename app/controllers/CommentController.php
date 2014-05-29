@@ -1,6 +1,6 @@
 <?php
 
-class CommentControler extends \BaseController {
+class CommentController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -29,9 +29,30 @@ class CommentControler extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($id)
 	{
 		//
+        $rules = array(
+            'content' => 'required|min:2|max:255'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('bug/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            // store
+            $comment = new Comment;
+            $comment->content = Input::get('content');
+            $comment->user_id = Auth::id();
+            $comment->bug_id = $id;
+            $comment->save();
+            // redirect
+            Session::flash('message', 'Successfully created Comment!' . $id);
+            return Redirect::to('bug/' . $id);
+        }
 	}
 
 

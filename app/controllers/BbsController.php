@@ -1,6 +1,18 @@
 <?php
 
+
 class BbsController extends \BaseController {
+
+    /**
+     * Instantiate a new UserController instance.
+     */
+    public function __construct()
+    {
+        $this->beforeFilter('auth', array('except' => array('index', 'show')));
+
+        $this->beforeFilter('csrf', array('on' => 'post'));
+
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -10,6 +22,12 @@ class BbsController extends \BaseController {
 	public function index()
 	{
 		//
+        $posts = Post::paginate(self::PAGE_NUMBER);
+        $totalPage = Post::count() / self::PAGE_NUMBER + 1;
+        $this->layout->title = '讨论';
+        $this->layout->content = View::make('bbs.index')
+            ->with('posts', $posts)
+            ->with('total', $totalPage);
 	}
 
 
@@ -21,6 +39,13 @@ class BbsController extends \BaseController {
 	public function create()
 	{
 		//
+        $this->layout->title = '发布新帖';
+        $topics = array();;
+        foreach(Topic::all(array('id', 'name')) as $topic) {
+            $topics[$topic->id] = $topic->name;
+        }
+        $this->layout->content = View::make('bbs.create')
+            ->with('topics', $topics);
 	}
 
 
@@ -32,6 +57,30 @@ class BbsController extends \BaseController {
 	public function store()
 	{
 		//
+        $rules = array(
+            'title' => 'required|min:2|max:50',
+            'content' => 'required|min:10|max:255',
+            'topic' => 'exists:bbs_topic,id'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('bbs/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $post = new Post;
+            $post->title = Input::get('title');
+            $post->content = Input::get('content');
+            $post->user_id = Auth::id();
+            $post->topic_id = Input::get('topic');
+            $post->save();
+
+            // redirect
+            Session::flash('message', 'Successfully created post!');
+            return Redirect::to('bbs/' . $post->id);
+        }
 	}
 
 
@@ -44,6 +93,12 @@ class BbsController extends \BaseController {
 	public function show($id)
 	{
 		//
+        $post = Post::findOrFail($id);
+        $post->read_count += 1;
+        $post->save();
+        $this->layout->title = '讨论 | ' . $post->title;
+        $this->layout->content = View::make('bbs.show')
+            ->with('post', $post);
 	}
 
 

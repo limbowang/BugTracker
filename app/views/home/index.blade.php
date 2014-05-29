@@ -11,7 +11,7 @@
 
         <div>
             <a class="btn btn-primary btn-lg" role="button">Learn more</a>
-            <a class="btn btn-warning btn-lg" role="button">Join us</a>
+            <a href="signin" class="btn btn-warning btn-lg" role="button">Join us</a>
         </div>
     </div>
 </div>

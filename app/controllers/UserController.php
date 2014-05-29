@@ -44,7 +44,7 @@ class UserController extends BaseController {
     public function store() {
         //
         $rules = array(
-            'username' => 'required|min:5|max:15|unique:user',
+            'username' => 'required|regex:/^(\w){5,15}$/|unique:user',
             'email' => 'required|email|unique:user',
             'password' => 'required|min:6|max:20',
             'password_confirmation' => 'required|same:password'

@@ -1,5 +1,7 @@
 <?php
 
+require_once app_path(). '/helpers/Date.php';
+
 /*
 |--------------------------------------------------------------------------
 | Register The Laravel Class Loader

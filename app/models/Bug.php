@@ -18,6 +18,7 @@
  * @property integer $read_count
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property-read \user $user
  */
 
 class Bug extends Eloquent {

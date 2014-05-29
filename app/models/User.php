@@ -17,6 +17,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @property string $last_login_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $remember_token
  */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 

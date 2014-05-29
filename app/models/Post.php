@@ -16,10 +16,24 @@
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
  * @property integer $topic_id
+ * @property-read \user $user
+ * @property-read \topic $topic
+ * @property-read \Illuminate\Database\Eloquent\Collection|\reply[] $replies
  */
 
-class Post  extends Eloquent {
+class Post extends Eloquent {
 
     protected $table = 'bbs_post';
 
+    public function user() {
+        return $this->belongsTo('user');
+    }
+
+    public function topic() {
+        return $this->belongsTo('topic');
+    }
+
+    public function replies() {
+        return $this->hasMany('reply');
+    }
 } 

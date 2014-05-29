@@ -21,7 +21,7 @@
                     <a href="#">排名</a>
                 </li>
                 <li>
-                    <a href="#">讨论</a>
+                    <a href="/bbs">讨论</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

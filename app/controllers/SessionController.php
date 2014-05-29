@@ -43,19 +43,16 @@ class SessionController extends \BaseController {
 
         $isRemember = Input::get('rememberme');
 
-        var_dump($inputs);
-
-
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
             return Redirect::to('signin')
                 ->withErrors($validator);
-        } else if (Auth::attempt($inputs, $isRemember)) {
+        } else if (Auth::attempt($inputs, false)) {
             return Redirect::intended('/');
         } else {
             return Redirect::to('signin')
-                ->with(array('message' => '用户名或密码不正确'));
+                ->with(array('message' => '用户名或密码不正确' . Input::get('username')));
         }
     }
 

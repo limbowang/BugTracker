@@ -7,7 +7,7 @@
 <div class="form-group">
     {{ Form::label('input-username', '用户名', array('class' => 'col-sm-3 control-label required')) }}
     <div class="col-sm-9">
-        {{ Form::text('username', Input::old('username'), array('id' => 'input-username', 'class' => 'form-control')) }}
+        {{ Form::text('username', Input::old('username'), array('id' => 'input-username', 'class' => 'form-control', 'placeholder' => '请输入5~15个数字、字母或下划线')) }}
         <div class='form-error-msg'>{{ $errors->get('username')[0] or '' }}</div>
     </div>
 </div>

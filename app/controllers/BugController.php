@@ -14,7 +14,6 @@ class BugController extends BaseController {
 
     }
 
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -23,14 +22,13 @@ class BugController extends BaseController {
 	public function index()
 	{
 		//
-        $page = Input::get('p');
-        $bugs = Bug::paginate(($page + 1) * self::PAGE_NUMBER);
+        $sort = Input::get('sort');
+        $bugs = Bug::paginate(self::PAGE_NUMBER);
         $totalPage = Bug::count() / self::PAGE_NUMBER + 1;
         $this->layout->title = '漏洞';
         $this->layout->content = View::make('bug.index')
             ->with('bugs', $bugs)
-            ->with('total', $totalPage)
-            ->with('page', $page);
+            ->with('total', $totalPage);
 	}
 
 
@@ -56,13 +54,13 @@ class BugController extends BaseController {
 	{
 		//
         $rules = array(
-            'name' => 'required|min:5|max:15|unique:bug',
+            'name' => 'required|min:2|max:15',
             'details' => 'required|min:10|max:255',
-            'os' => 'required|min:1|max:20',
-            'software' => 'required',
+            'os' => 'required|min:1|max:10',
+            'software' => 'required|min:1|max:20',
             'level' => 'required',
-            'tag' => 'max:50',
-            'img' => 'max:2048'
+            'tag' => 'max:150',
+            'img' => 'image|max:2048'
         );
 
         $validator = Validator::make(Input::all(), $rules);
@@ -70,7 +68,7 @@ class BugController extends BaseController {
         if ($validator->fails()) {
             return Redirect::to('bug/create')
                 ->withErrors($validator)
-                ->withInput();;
+                ->withInput();
         } else {
             // store
             $bug = new Bug;
@@ -83,6 +81,7 @@ class BugController extends BaseController {
             $bug->tag = Input::get('tag');
             // handle file upload
             if (Input::hasFile('img')) {
+                var_dump("12312");
                 $newFileName = str_random(40);
                 Input::file('img')->move(app_path() . '/storage/uploads', $newFileName);
                 $bug->img = $newFileName;
@@ -106,6 +105,9 @@ class BugController extends BaseController {
 	{
 		//
         $bug = Bug::findOrFail($id);
+        $bug->read_count += 1;
+        $bug->save();
+        $this->layout->title = "漏洞 | " . $bug->name;
         $this->layout->content = View::make('bug.show')
             ->with('bug', $bug);
 	}

@@ -32,8 +32,8 @@
 </div>
 
 {{ Form::submit('登陆', array('class' => 'btn btn-primary btn-lg btn-block')) }}
-{{ HTML::link('signup', '忘记密码', array('class' => 'form-link')) }}
-
+{{ HTML::link('#', '忘记密码', array('class' => 'form-link')) }}
+{{ HTML::link('signup', '加入我们', array('class' => 'form-link')) }}
 {{ Form::close() }}
 
 @stop

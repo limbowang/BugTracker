@@ -11,7 +11,7 @@
         <div class="topic-header">
             <div class="avatar">
                 <a href="{{ '/user/' . $post->user->id }}">
-                    <img src="{{ $post->user->avatar or  'images/example-image.jpg'}}" alt=""/>
+                    <img src="{{ $post->user->avatar or  '/images/default.jpg'}}" alt=""/>
                 </a>
             </div>
             <div class="title">
@@ -28,11 +28,11 @@
         </div>
 
         @if (($count = count($replies)) == 0)
-        <div class="no-replies">
+        <div id="replies" class="no-replies">
             没有回复
         </div>
         @else
-        <div class="replies">
+        <div id="replies" class="replies">
             <div class="reply-header">
                 共{{ $count }}条回复
             </div>
@@ -41,7 +41,7 @@
                 <li class="reply-list-item">
                     <div class="avatar">
                         <a href="{{ 'user/' . $reply->user->id }}">
-                            <img src="{{ $reply->user->avatar or asset('images/example-image.jpg')}}" alt=""/>
+                            <img src="{{ $reply->user->avatar or asset('/images/default.jpg')}}" alt=""/>
                         </a>
                     </div>
                     <div class="title">

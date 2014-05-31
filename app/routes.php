@@ -11,26 +11,24 @@
 |
 */
 
+Route::get('user/create', function() {
+    App::abort(404);
+});
+
+Route::post('bbs/{id}/reply', 'ReplyController@store');
+Route::post('bug/{id}/comment', 'CommentController@store');
+Route::get('/', array('uses' => 'HomeController@getIndex'));
+Route::get('/signup', array('uses' => 'UserController@create'));
+Route::get('/signin', array('uses' => 'SessionController@create'));
+Route::get('/logout', array('uses' => 'SessionController@destroy'));
 
 Route::resource('user', 'UserController', array(
     'except' => array('create')
 ));
-
 Route::resource('session', 'SessionController');
-
 Route::resource('bug', 'BugController');
-
 Route::resource('bbs', 'BbsController');
 
-//Route::resource('reply', 'ReplyController', array(
-//    'only' => array('store', 'update', 'delete')
-//));
+Route::controller('/', 'DashboardController');
+Route::controller('admin', 'AdminController');
 
-Route::post('bbs/{id}/reply', 'ReplyController@store');
-
-Route::post('bug/{id}/comment', 'CommentController@store');
-
-Route::get('/', array('uses' => 'HomeController@getIndex'));
-Route::get('signup', array('uses' => 'UserController@create'));
-Route::get('signin', array('uses' => 'SessionController@create'));
-Route::get('logout', array('uses' => 'SessionController@destroy'));

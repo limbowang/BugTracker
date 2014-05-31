@@ -29,4 +29,8 @@ class Bug extends Eloquent {
         return $this->belongsTo('user');
     }
 
+    public function comments() {
+        return $this->hasMany('comment');
+    }
+
 }

@@ -19,6 +19,9 @@ class SessionController extends \BaseController {
      */
     public function create() {
         //
+        if (Auth::check()) {
+            return Redirect::intended('/');
+        }
         $this->layout->title = '登陆';
         $this->layout->content = View::make('session.create');
     }

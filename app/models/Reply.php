@@ -23,4 +23,8 @@ class Reply extends Eloquent {
         return $this->belongsTo('user');
     }
 
+    public function post() {
+        return $this->belongsTo('post');
+    }
+
 }

@@ -14,7 +14,7 @@ String.prototype.repeat = function(num) {
           , i;
         for (i = 1; i <= amount - 2; i++) {
           output += '<div class="ui-slider-segment" style="top:' + 100 / (amount - 1) * i + '%;"></div>';
-        };
+        }
         $(this).prepend(output);
       } else {
         var segmentGap = 100 / (amount - 1) + "%"
@@ -108,7 +108,19 @@ String.prototype.repeat = function(num) {
 
     // make code pretty
     window.prettyPrint && prettyPrint();
-    
+
+
+    // img upload
+    var
+      $uploadForm = $(".form-upload"),
+      $uploadBtn = $uploadForm.find(".btn-upload"),
+      $uploadInput = $uploadForm.find('.input-img-upload');
+    $uploadBtn.on('click', function() {
+      $uploadInput.click();
+    });
+    $uploadInput.on('change', function() {
+
+    });
   });
   
 })(jQuery);

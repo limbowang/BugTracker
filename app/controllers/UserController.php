@@ -31,6 +31,9 @@ class UserController extends BaseController {
      */
     public function create() {
         //
+        if (Auth::check()) {
+            return Redirect::intended('/');
+        }
         $this->layout->title = '注册';
         $this->layout->content = View::make('user.create');
     }
@@ -66,6 +69,7 @@ class UserController extends BaseController {
 
             // redirect
             Session::flash('message', 'Successfully created nerd!');
+            Auth::loginUsingId($user->id);
             return Redirect::to('user');
         }
     }

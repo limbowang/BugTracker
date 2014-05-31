@@ -36,7 +36,17 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li>{{ HTML::link('#', '个人信息') }}</li>
+                        <li>{{ HTML::link('profile', '个人资料') }}</li>
+                        <li>{{ HTML::link('security', '安全与密码') }}</li>
+                        <li class="divider"></li>
+                        <li>{{ HTML::link('mybugs', '我的漏洞') }}</li>
+                        <li>{{ HTML::link('comments-received', '收到的评论') }}</li>
+                        <li>{{ HTML::link('mycomments', '我的评论') }}</li>
+                        <li class="divider"></li>
+                        <li>{{ HTML::link('myposts', '我的帖子') }}</li>
+                        <li>{{ HTML::link('replies-received', '收到的回复') }}</li>
+                        <li>{{ HTML::link('myreplies', '我的回复') }}</li>
+                        <li class="divider"></li>
                         <li>{{ HTML::link('logout', '退出') }}</li>
                     </ul>
                 </li>

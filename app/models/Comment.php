@@ -22,4 +22,8 @@ class Comment extends Eloquent{
     public function user() {
         return $this->belongsTo('user');
     }
+
+    public function bug() {
+        return $this->belongsTo('bug');
+    }
 } 

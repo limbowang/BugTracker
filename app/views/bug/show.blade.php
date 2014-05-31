@@ -65,11 +65,11 @@
         @endif
 
         @if (($count = count($comments)) == 0)
-        <div class="no-comments">
+        <div id='comments' class="no-comments">
             暂无评论
         </div>
         @else
-        <div class="comments">
+        <div id="comments" class="comments">
             <div class="comment-header">
                 共{{ $count }}条评论
             </div>
@@ -78,7 +78,7 @@
                 <li class="comment-list-item">
                     <div class="avatar">
                         <a href="{{ 'user/' . $comment->user->id }}">
-                            <img src="{{ $comment->user->avatar or 'images/example-image.jpg'}}" alt=""/>
+                            <img src="{{ $comment->user->avatar or '/images/default.jpg'}}" alt=""/>
                         </a>
                     </div>
                     <div class="title">
@@ -101,7 +101,7 @@
         {{ Form::open(array('url' => URL::current() . '/comment', 'class' => 'form-container')) }}
 
         <div class="form-group">
-            {{ Form::label('comment-content', '评论：', array('class' => 'col-sm-3 control-label')) }}
+            {{ Form::label('comment-content', '评论：', array('class' => 'control-label')) }}
             {{ Form::textarea('content', Input::old('content'), array('id' => 'comment-content', 'class' => 'form-control
             form-field', 'placeholder' => '请输入2~255个字符', 'rows' => 5)) }}
             <div class='form-error-msg'>{{ $errors->get('content')[0] or '' }}</div>

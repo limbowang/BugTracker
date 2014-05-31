@@ -4,7 +4,7 @@
 class BbsController extends \BaseController {
 
     /**
-     * Instantiate a new UserController instance.
+     * Instantiate a new BbsController instance.
      */
     public function __construct()
     {
@@ -101,7 +101,7 @@ class BbsController extends \BaseController {
         foreach(Topic::all(array('id', 'name')) as $topic) {
             $topics[$topic->id] = $topic->name;
         }
-        $this->layout->title = '讨论 | ' . $post->title;
+        $this->layout->title = $post->title;
         $this->layout->content = View::make('bbs.show')
             ->with('post', $post)
             ->with('replies', $replies)

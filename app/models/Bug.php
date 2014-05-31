@@ -25,6 +25,8 @@ class Bug extends Eloquent {
 
     protected $table = 'bug';
 
+    protected $softDelete = true;
+
     public function user() {
         return $this->belongsTo('user');
     }

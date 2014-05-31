@@ -19,6 +19,8 @@ class Reply extends Eloquent {
 
     protected $table = 'bbs_reply';
 
+    protected $softDelete = true;
+
     public function user() {
         return $this->belongsTo('user');
     }

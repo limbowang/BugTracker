@@ -56,9 +56,13 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getCommentsReceived() {
-        $comments = Comment::with(array('bug' => function($query) {
-            $query->where('user_id', '=', Auth::id());
-        }))->where('user_id', '!=', Auth::id())
+        $comments = Comment::with(array('bug' => function ($query) {
+                $query->where('user_id', '=', Auth::id())->withTrashed();
+            }))
+            ->whereHas('bug', function($query) {
+                $query->where('user_id', '=', Auth::id());
+            })
+            ->where('bug_comment.user_id', '!=', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(self::PAGE_NUMBER);
         $this->layout->title = '收到的评论';
@@ -72,7 +76,9 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getMycomments() {
-        $comments = Comment::with('bug')
+        $comments = Comment::with(array('bug' => function ($query) {
+                $query->withTrashed();
+            }))
             ->where('user_id', '=', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(self::PAGE_NUMBER);
@@ -102,9 +108,13 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getRepliesReceived() {
-        $replies = Reply::with(array('post' => function($query) {
+        $replies = Reply::with(array('post' => function ($query) {
+                $query->where('user_id', '=', Auth::id())->withTrashed();
+            }))
+            ->whereHas('post', function($query) {
                 $query->where('user_id', '=', Auth::id());
-            }))->where('user_id', '!=', Auth::id())
+            })
+            ->where('user_id', '!=', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(self::PAGE_NUMBER);
         $this->layout->title = '收到的回复';
@@ -118,7 +128,9 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getMyreplies() {
-        $replies = Reply::with('post')
+        $replies = Reply::with(array('post' => function ($query) {
+                $query->withTrashed();
+            }))
             ->where('user_id', '=', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(self::PAGE_NUMBER);

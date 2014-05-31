@@ -101,6 +101,10 @@ class ReplyController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+        if (Reply::find($id)) {
+            Reply::destroy($id);
+        }
+        return Redirect::back();
 	}
 
 

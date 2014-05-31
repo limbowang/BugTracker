@@ -101,6 +101,9 @@ class CommentController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+        if (Comment::find($id))
+            Comment::destroy($id);
+        return Redirect::back();
 	}
 
 

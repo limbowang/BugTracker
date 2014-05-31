@@ -19,6 +19,8 @@ class Comment extends Eloquent{
 
     protected $table = 'bug_comment';
 
+    protected $softDelete = true;
+
     public function user() {
         return $this->belongsTo('user');
     }

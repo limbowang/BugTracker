@@ -8,6 +8,11 @@
 <div class="content">
 
     <div class="bug-panel">
+        @if (empty($bug))
+        <div class="alert alert-warning">
+            该漏洞不存在或已被删除
+        </div>
+        @else
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">漏洞概要</h3>
@@ -75,6 +80,13 @@
             </div>
             <ul class="comment-list">
                 @foreach($comments as $comment)
+                @if ($comment->trashed())
+                <li class="comment-list-item">
+                    <div class="content">
+                        {{ ++$comment_start . '楼 已被删除' }}
+                    </div>
+                </li>
+                @else
                 <li class="comment-list-item">
                     <div class="avatar">
                         <a href="{{ 'user/' . $comment->user->id }}">
@@ -82,7 +94,8 @@
                         </a>
                     </div>
                     <div class="title">
-                        <span class="name">{{ HTML::link('/user/' . $comment->user->id, $comment->user->username) }}</span>
+                                <span
+                                    class="name">{{ HTML::link('/user/' . $comment->user->id, $comment->user->username) }}</span>
                         <span class="floor">{{ ++$comment_start . '楼' }}</span>
                         <span class="time">{{ time2Units($comment->created_at) }}</span>
                     </div>
@@ -90,6 +103,7 @@
                         {{ $comment->content }}
                     </div>
                 </li>
+                @endif
                 @endforeach
             </ul>
             {{ $comments->links() }}
@@ -102,7 +116,8 @@
 
         <div class="form-group">
             {{ Form::label('comment-content', '评论：', array('class' => 'control-label')) }}
-            {{ Form::textarea('content', Input::old('content'), array('id' => 'comment-content', 'class' => 'form-control
+            {{ Form::textarea('content', Input::old('content'), array('id' => 'comment-content', 'class' =>
+            'form-control
             form-field', 'placeholder' => '请输入2~255个字符', 'rows' => 5)) }}
             <div class='form-error-msg'>{{ $errors->get('content')[0] or '' }}</div>
         </div>
@@ -110,6 +125,7 @@
         {{ Form::submit('提交', array('class' => 'btn btn-info btn-lg btn-block')) }}
 
         {{ Form::close() }}
+        @endif
     </div>
 
     <div class="sidebar">

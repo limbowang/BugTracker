@@ -25,6 +25,8 @@ class Post extends Eloquent {
 
     protected $table = 'bbs_post';
 
+    protected $softDelete = true;
+
     public function user() {
         return $this->belongsTo('user');
     }

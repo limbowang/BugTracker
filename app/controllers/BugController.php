@@ -6,22 +6,20 @@ class BugController extends BaseController {
     /**
      * Instantiate a new UserController instance.
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->beforeFilter('auth', array('except' => array('index', 'show')));
 
         $this->beforeFilter('csrf', array('on' => 'post'));
 
     }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index() {
+        //
         $sort = Input::get('sort');
         $bugs = Bug::paginate(self::PAGE_NUMBER);
         $totalPage = Bug::count() / self::PAGE_NUMBER + 1;
@@ -29,30 +27,28 @@ class BugController extends BaseController {
         $this->layout->content = View::make('bug.index')
             ->with('bugs', $bugs)
             ->with('total', $totalPage);
-	}
+    }
 
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create() {
+        //
         $this->layout->title = '发布新漏洞';
         $this->layout->content = View::make('bug.create');
-	}
+    }
 
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store() {
+        //
         $rules = array(
             'name' => 'required|min:2|max:15',
             'details' => 'required|min:10|max:255',
@@ -91,67 +87,74 @@ class BugController extends BaseController {
             Session::flash('message', 'Successfully created bug!');
             return Redirect::to('bug/' . $bug->id);
         }
-	}
+    }
 
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-        $bug = Bug::findOrFail($id);
-        $bug->read_count += 1;
-        $bug->save();
-        $page = Input::has('page') ? Input::get('page') : 1;
-        $comments = Comment::where('bug_id', '=', $id)->paginate(self::PAGE_NUMBER);
-        $this->layout->title = $bug->name;
-        $this->layout->content = View::make('bug.show')->with(array(
-            'bug' => $bug,
-            'page' => $page,
-            'comments' => $comments,
-            'comment_start' =>  self::PAGE_NUMBER * ($page - 1)
-        ));
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function show($id) {
+        //
+        $bug = Bug::find($id);
+        if (empty($bug)) {
+            $page = Input::has('page') ? Input::get('page') : 1;
+            $this->layout->title = '错误';
+            $this->layout->content = View::make('bug.show')->with(array(
+                'bug' => $bug,
+                'comment_start' => self::PAGE_NUMBER * ($page - 1)
+            ));
+        } else {
+            $bug->read_count += 1;
+            $bug->save();
+            $page = Input::has('page') ? Input::get('page') : 1;
+            $comments = Comment::where('bug_id', '=', $id)->withTrashed()->paginate(self::PAGE_NUMBER);
+            $this->layout->title = $bug->name;
+            $s = new Comment;
+            $this->layout->content = View::make('bug.show')->with(array(
+                'bug' => $bug,
+                'page' => $page,
+                'comments' => $comments,
+                'comment_start' => self::PAGE_NUMBER * ($page - 1)
+            ));
+        }
+    }
 
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function edit($id) {
+        //
+    }
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function update($id) {
+        //
+    }
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return Response
+     */
+    public function destroy($id) {
+        //
+        if (Bug::find($id))
+            Bug::destroy($id);
+        return Redirect::back();
+    }
 }

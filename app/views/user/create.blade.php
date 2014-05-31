@@ -15,7 +15,7 @@
 <div class="form-group">
     {{ Form::label('input-email', '邮箱', array('class' => 'col-sm-3 control-label required')) }}
     <div class="col-sm-9">
-        {{ Form::email('email', Input::old('email'), array('id' => 'input-email', 'class' => 'form-control')) }}
+        {{ Form::text('email', Input::old('email'), array('id' => 'input-email', 'class' => 'form-control')) }}
         <div class='form-error-msg'>{{ $errors->get('email')[0] or '' }}</div>
     </div>
 </div>

@@ -491,6 +491,13 @@ ul, ol {
   border: solid 1px #edeff1;
 }
 
+.dashboard .dashboard-content .no-list{
+    display: block;
+    padding-top: 10px;
+    margin-left: -10px;
+    text-align: center;
+}
+
 .dashboard .lists {
 
 }

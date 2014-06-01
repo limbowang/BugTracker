@@ -16,8 +16,8 @@
                     <span class="time">发布于{{ $post->created_at }}</span>
                 </div>
                 <div class="list-item-footer">
-                    {{ HTML::link('/post/' . $post->id . '#replies', '回复(' . count($post->replies) . ')') }}
-                    <a href="#">更新</a>
+                    {{ HTML::link('/bbs/' . $post->id . '#replies', '回复(' . count($post->replies) . ')') }}
+                    {{ HTML::link('/bbs/' . $post->id . '/edit', '更新') }}
                     <a href="javascript:void(0);" class="btn-delete" data-toggle="modal" data-target="#modal-delete"
                        data-item-id="bbs-{{ $post->id }}" data-item-title="{{ $post->title }}">删除</a>
                 </div>

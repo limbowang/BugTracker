@@ -16,7 +16,7 @@
         </li>
         <li class="category">
             <ul class="categories">
-                <li class="category"><a href="/myposts">我的讨论</a></li>
+                <li class="category"><a href="/myposts">我的帖子</a></li>
                 <li class="category"><a href="/replies-received">收到的回复</a></li>
                 <li class="category"><a href="/myreplies">我的回复</a></li>
             </ul>

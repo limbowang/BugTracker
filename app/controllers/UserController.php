@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\MessageBag;
 
 class UserController extends BaseController {
 
@@ -9,6 +8,8 @@ class UserController extends BaseController {
      * Instantiate a new UserController instance.
      */
     public function __construct() {
+        $this->beforeFilter('auth', array('except' => array('create', 'show')));
+        $this->beforeFilter('csrf', array('on' => 'post'));
     }
 
     /**
@@ -105,6 +106,72 @@ class UserController extends BaseController {
      */
     public function update($id) {
         //
+        if (!Input::has('type')) {
+            App::abort(500);
+        }
+        $type = Input::get('type');
+        $user = Auth::user();
+        if ($type == 'p') { // profile
+            $rules = array(
+                'email' => 'required|email|unique:user,email,' . Auth::id(),
+                'avatar' => 'image|max:2048',
+            );
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->fails()) {
+                return Redirect::back()
+                    ->with('user', $user)
+                    ->withErrors($validator);
+            } else {
+                // update
+                $email = Input::get('email');
+                if ($user->email != $email) {
+                    $user->email = $email;
+                }
+                if (Input::hasFile('avatar')) {
+                    $newFileName = str_random(40);
+                    Input::file('avatar')->move('avatars', $newFileName);
+                    $user->avatar = '/avatars/' . $newFileName;
+                }
+                $user->save();
+
+                // redirect
+                Session::flash('message', '保存成功');
+                return Redirect::back()
+                    ->with('user', $user);
+            }
+        } else if ($type == 's') {
+            $rules = array(
+                'old_password'=> 'required_with:new_password|passcheck',
+                'new_password' => 'min:6|max:20|different:old_password',
+                'new_password_confirmation' => 'required_with:new_password|same:new_password',
+                'answer' => 'exists:user,answer,id,' . Auth::id(),
+                'new_question' => 'min:2|max:20',
+                'new_answer' => 'required_with:new_question|min:2|max:20',
+            );
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->fails()) {
+                return Redirect::back()
+                    ->withErrors($validator)
+                    ->withInput(Input::except('old_password', 'password', 'password_confirmation'))
+                    ->with('user', $user);
+            } else {
+                // update
+                if (Input::has('new_question')) {
+                    $user->question = Input::get('new_question');
+                    $user->answer = Input::get('new_answer');
+                }
+                if (Input::has('new_password')) {
+                    $user->password = Hash::make(Input::get('new_password'));
+                }
+                $user->save();
+                // redirect
+                Session::flash('message', '保存成功');
+                return Redirect::back()->
+                    with('user', $user);
+            }
+        } else {
+            App::abort(500);
+        }
     }
 
 

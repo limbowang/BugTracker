@@ -50,7 +50,7 @@ class CommentController extends \BaseController {
             $comment->bug_id = $id;
             $comment->save();
             // redirect
-            Session::flash('message', 'Successfully created Comment!' . $id);
+            Session::flash('message', '评论成功');
             return Redirect::to('bug/' . $id);
         }
 	}

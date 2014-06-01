@@ -21,8 +21,10 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getProfile() {
+        $user = Auth::user();
         $this->layout->title = '个人资料';
-        $this->layout->content = View::make('dashboard.profile');
+        $this->layout->content = View::make('dashboard.profile')
+            ->with('user', $user);
     }
 
     /**
@@ -31,8 +33,10 @@ class DashboardController extends BaseController {
      * @return Response
      */
     public function getSecurity() {
+        $user = Auth::user();
         $this->layout->title = '安全与密码';
-        $this->layout->content = View::make('dashboard.security');
+        $this->layout->content = View::make('dashboard.security')
+            ->with('user', $user);
     }
 
     /**

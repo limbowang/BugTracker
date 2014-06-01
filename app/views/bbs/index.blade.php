@@ -1,10 +1,6 @@
 @extends('layout.master')
 
 @section('content')
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
 <div class="content">
     <div class="topics">
         <div class="topics-header">
@@ -27,8 +23,8 @@
             @foreach($posts as $post)
             <li class="topics-stream-item">
                 <div class="avatar">
-                    <a href="{{ 'user/' . $post->user->id }}">
-                        <img src="{{ $post->user->avater or  'images/default.jpg'}}" alt=""/>
+                    <a href="{{ '/user/' . $post->user->id }}">
+                        <img src="{{ $post->user->avatar or  '/images/default.jpg'}}" alt=""/>
                     </a>
                 </div>
                 <div class="title">

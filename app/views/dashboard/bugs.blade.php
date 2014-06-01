@@ -17,7 +17,7 @@
                 </div>
                 <div class="list-item-footer">
                     {{ HTML::link('/bug/' . $bug->id . '#comments', '评论(' . count($bug->comments) . ')') }}
-                    <a href="#">更新</a>
+                    {{ HTML::link('/bug/' . $bug->id . '/edit', '更新') }}
                     <a href="javascript:void(0);" class="btn-delete" data-toggle="modal" data-target="#modal-delete"
                        data-item-id="bug-{{ $bug->id }}" data-item-title="{{ $bug->name }}">删除</a>
                 </div>

@@ -114,12 +114,16 @@ String.prototype.repeat = function (num) {
         var
             $uploadForm = $(".form-upload"),
             $uploadBtn = $uploadForm.find(".btn-upload"),
-            $uploadInput = $uploadForm.find('.input-img-upload');
+            $uploadInput = $uploadForm.find('.input-img-upload'),
+            $filename = $uploadForm.find('.filename');
         $uploadBtn.on('click', function () {
             $uploadInput.click();
         });
         $uploadInput.on('change', function () {
-
+            var
+                filepath = $(this).val(),
+                filename = filepath.substring(filepath.lastIndexOf('\\') + 1);
+            $filename.text(filename);
         });
 
 

@@ -1,10 +1,6 @@
 @extends('layout.master')
 
 @section('content')
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
 {{ Form::open(array('url' => '/bug', 'files' => true, 'class' => 'form-container signin-form')) }}
 
 <div class="form-group">
@@ -39,7 +35,7 @@
 
 <div class="form-group">
     {{ Form::label('bug-tag', '标签：', array('class' => 'control-label')) }}
-    {{ Form::text('tags', Input::old('tag'), array('id' => 'bug-tag', 'class' => 'tagsinput', 'placeholder' => '用户名')) }}
+    {{ Form::text('tag', Input::old('tag'), array('id' => 'bug-tag', 'class' => 'tagsinput', 'placeholder' => '用户名')) }}
     <div class='form-error-msg'>{{ $errors->get('tags')[0] or '' }}</div>
 </div>
 

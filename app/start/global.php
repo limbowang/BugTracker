@@ -1,6 +1,7 @@
 <?php
 
 require_once app_path(). '/helpers/Date.php';
+require_once app_path() . '/helpers/Validator.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+//    return Response::view('layout.error', array('code' => $code, 'title'=> $code . ' Error'), $code);
 });
 
 /*

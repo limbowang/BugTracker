@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.masternomsg')
 
 @section('content')
 <div class="intro">

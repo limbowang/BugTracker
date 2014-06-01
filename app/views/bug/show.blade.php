@@ -1,10 +1,6 @@
 @extends('layout.master')
 
 @section('content')
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
 <div class="content">
 
     <div class="bug-panel">
@@ -64,7 +60,7 @@
                 <h3 class="panel-title">漏洞贴图</h3>
             </div>
             <div class="panel-body">
-                <img src="{{ '/bugimage/' . $bug->img }}" alt=""/>
+                <img src="{{ $bug->img }}" alt=""/>
             </div>
         </div>
         @endif

@@ -15,3 +15,4 @@ Other: curl -sS https://getcomposer.org/installer | php
 
 ###已知Bugs
 1. 使用/bug/8abc能解析到/bug/8
+2. auth的问题

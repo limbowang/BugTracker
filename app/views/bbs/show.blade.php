@@ -1,10 +1,6 @@
 @extends('layout.master')
 
 @section('content')
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-{{ $errors->get('id')[0] or '' }}
 
 <div class="content">
     <div class="topic">
@@ -52,7 +48,7 @@
                     @else
                     <li class="reply-list-item">
                         <div class="avatar">
-                            <a href="{{ 'user/' . $reply->user->id }}">
+                            <a href="{{ '/user/' . $reply->user->id }}">
                                 <img src="{{ $reply->user->avatar or asset('/images/default.jpg')}}" alt=""/>
                             </a>
                         </div>

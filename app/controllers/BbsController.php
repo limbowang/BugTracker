@@ -8,9 +8,10 @@ class BbsController extends \BaseController {
      */
     public function __construct() {
         $this->beforeFilter('auth', array('except' => array('index', 'show')));
-
         $this->beforeFilter('csrf', array('on' => 'post'));
+        $this->beforeFilter(function() {
 
+        }, array('only' => array('update', 'edit', 'destroy')));
     }
 
     /**
@@ -96,7 +97,6 @@ class BbsController extends \BaseController {
             $this->layout->title = '错误';
             $this->layout->content = View::make('bbs.show')
                 ->with('post', $post)
-                ->with('reply_start', self::PAGE_NUMBER * ($page - 1))
                 ->with('all_topics', Topic::all());
         } else {
             $post->read_count += 1;
@@ -121,6 +121,19 @@ class BbsController extends \BaseController {
      */
     public function edit($id) {
         //
+        $post = Post::find($id);
+        if (!Auth::user()->is_admin && $post->user_id != Auth::id()) {
+            App::abort(403);
+        }
+
+        $topics = array();
+        foreach (Topic::all(array('id', 'name')) as $topic) {
+            $topics[$topic->id] = $topic->name;
+        }
+        $this->layout->title = '更新 | ' . $post->title;
+        $this->layout->content = View::make('bbs.edit')
+            ->with('post', $post)
+            ->with('topics', $topics);
     }
 
 
@@ -132,6 +145,41 @@ class BbsController extends \BaseController {
      */
     public function update($id) {
         //
+        $post = Post::findOrFail($id);
+
+        if (!Auth::user()->is_admin && $post->user_id != Auth::id()) {
+            Session::flash('message', '更新失败');
+            return Redirect::back(403);
+        }
+
+        $rules = array(
+            'title' => 'required|min:2|max:50',
+            'content' => 'required|min:10|max:255',
+            'topic' => 'exists:bbs_topic,id'
+        );
+
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::to('bbs/create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            if (Input::has('title')) {
+                $post->title = Input::get('title');
+            }
+            if (Input::has('content')) {
+                $post->content = Input::get('content');
+            }
+            if (Input::has('topic')) {
+                $post->topic_id = Input::get('topic');
+            }
+            $post->update();
+
+            // redirect
+            Session::flash('message', '更新成功');
+            return Redirect::to('/bbs/' . $post->id);
+        }
     }
 
 
@@ -143,11 +191,17 @@ class BbsController extends \BaseController {
      */
     public function destroy($id) {
         //
-        if (Post::find($id)) {
-            Post::destroy($id);
+        $post = Post::find($id);
+        if (empty($post)) {
+            Session::flash('error', '该帖子不存在');
+            return Redirect::back();
+        } else if ($post->user_id != Auth::id() && !Auth::user()->is_admin) {
+            Session::flash('error', '无法删除该贴');
+            return Redirect::back();
+        } else {
+            $result = Post::destroy($id);
+            Session::flash('message', '删除成功');
+            return Redirect::back();
         }
-        return Redirect::back();
     }
-
-
 }

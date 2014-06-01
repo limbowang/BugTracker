@@ -18,7 +18,6 @@
 
 <div class="main">
     @include('layout.navbar')
-    @include('layout.message')
     @yield('content')
 
 </div>

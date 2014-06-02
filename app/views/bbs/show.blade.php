@@ -88,19 +88,20 @@
         <div class="box">
             <div class="title">相关讨论</div>
             <ul class="content">
-                <li><a href="#">测试话题1</a></li>
-                <li><a href="#">测试话题2</a></li>
-                <li><a href="#">测试话题3</a></li>
-                <li><a href="#">测试话题4</a></li>
-                <li><a href="#">测试话题5</a></li>
-                <li><a href="#">测试话题6</a></li>
+                @if ($related_posts->count() == 0)
+                <li>暂无相关讨论</li>
+                @else
+                @foreach($related_posts as $post)
+                <li>{{ HTML::link('/bbs/' . $post->id, $post->title) }}</li>
+                @endforeach
+                @endif
             </ul>
         </div>
         <div class="box">
             <div class="title">话题</div>
             <ul class="content">
                 @foreach($all_topics as $topic)
-                <li>{{ HTML::link('#', $topic->name) }}</li>
+                <li>{{ HTML::link('/bbs?topic=' . $topic->name, $topic->name) }}</li>
                 @endforeach
             </ul>
         </div>

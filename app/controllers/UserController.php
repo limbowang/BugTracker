@@ -10,6 +10,7 @@ class UserController extends BaseController {
     public function __construct() {
         $this->beforeFilter('auth', array('except' => array('create', 'show')));
         $this->beforeFilter('csrf', array('on' => 'post'));
+        $this->beforeFilter('admin', array('only' => array('destroy')));
     }
 
     /**
@@ -183,6 +184,13 @@ class UserController extends BaseController {
      */
     public function destroy($id) {
         //
+        $user = User::find($id);
+        if (empty($user)) {
+            Session::flash('error', '该用户不存在');
+        } else {
+            $user->delete();
+        }
+        return Redirect::back();
     }
 
 

@@ -101,8 +101,14 @@ class ReplyController extends \BaseController {
 	public function destroy($id)
 	{
 		//
-        if (Reply::find($id)) {
-            Reply::destroy($id);
+        $reply = Reply::find($id);
+        if (empty($reply)) {
+            Session::flash('error', '该回复不存在');
+        } else if ($reply->user_id != Auth::id() && !Auth::user()->is_admin) {
+            Session::flash('error', '无法删除该回复');
+        } else {
+            $reply->delete();
+            Session::flash('message', '删除成功');
         }
         return Redirect::back();
 	}

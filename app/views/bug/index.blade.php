@@ -9,15 +9,17 @@
         <div class="sorts pull-left">
             <span class="lb">查看：</span>
             <ul>
+                @foreach($sortlist as $sortkey=>$sortname)
+                @if ($sort == $sortkey)
                 <li class="active">
-                    最新
+                    {{ $sortname }}
                 </li>
+                @else
                 <li class="">
-                    <a href="#">最热门</a>
+                    <a href="/bug?sort={{ $sortkey }}">{{ $sortname }}</a>
                 </li>
-                <li class="">
-                    <a href="#">评论最多</a>
-                </li>
+                @endif
+                @endforeach
             </ul>
         </div>
         <div class="pull-right">
@@ -30,10 +32,10 @@
     <table class="table table-hover table-bordered">
         <thead>
         <tr class="success">
-            <th>Publish date</th>
-            <th>Bug name</th>
-            <th>Related software</th>
-            <th>Provider</th>
+            <th>发布时间</th>
+            <th>漏洞名称</th>
+            <th>相关软件</th>
+            <th>发布者</th>
         </tr>
         </thead>
         <tbody>
@@ -47,6 +49,6 @@
         @endforeach
         </tbody>
     </table>
-    {{ $bugs->links() }}
+    {{ $bugs->appends(array('sort' => $sort))->links() }}
 </div>
 @stop

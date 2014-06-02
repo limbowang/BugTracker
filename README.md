@@ -16,3 +16,5 @@ Other: curl -sS https://getcomposer.org/installer | php
 ###已知Bugs
 1. 使用/bug/8abc能解析到/bug/8
 2. auth的问题
+3. bug的图片显示不出
+4. 列出comment和reply时如果bug或post删除就无法列出

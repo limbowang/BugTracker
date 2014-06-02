@@ -3,36 +3,37 @@
 @section('admin')
 
 <div class="dashboard">
-    <div class="dashboard-header">所有用户</div>
+    <div class="dashboard-header">所有帖子</div>
     <div class="dashboard-content">
-        @if (count($users) == 0)
-        <span class="no-list">暂无用户</span>
+        @if ($posts->count() == 0)
+        <span class="no-list">暂无帖子</span>
         @else
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>编号</th>
-                <th>用户名</th>
-                <th>邮箱</th>
-                <th>注册时间</th>
-                <th>管理员</th>
+                <th>标题</th>
+                <th>发布人</th>
+                <th>发布时间</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($posts as $post)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ HTML::link('/user/' . $user->id, $user->username) }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->isAdmin() ? '是' : '否' }}</td>
+                <td>{{ $post->id }}</td>
+                <td>{{ HTML::link('/post/' . $post->id, $post->title) }}</td>
+                <td>{{ $post->user->username }}</td>
+                <td>{{ $post->created_at }}</td>
                 <td>
-<!--                    <span>提升为管理员</span>-->
-                    @if (!$user->isAdmin())
+                    @if ($post->trashed())
+                    <span>
+                        恢复
+                    </span>
+                    @else
                     <span>
                         <a href="javascript:void(0);" class="btn-delete" data-toggle="modal" data-target="#modal-delete"
-                           data-item-id="user-{{ $user->id }}" data-item-title="{{ $user->username }}">删除</a>
+                           data-item-id="bbs-{{ $post->id }}" data-item-title="{{ $post->title }}">删除</a>
                     </span>
                     @endif
                 </td>
@@ -40,7 +41,7 @@
             @endforeach
             </tbody>
         </table>
-        {{ $users->links() }}
+        {{ $posts->links() }}
         @endif
     </div>
 </div>
@@ -51,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <span class="modal-title" id="modalLabel">确认删除用户</span>
+                <span class="modal-title" id="modalLabel">确认删除帖子</span>
             </div>
             <div class="modal-footer">
                 {{ Form::open(array('method'=>'DELETE', 'url'=>'', 'id' => 'form-delete')) }}

@@ -84,12 +84,7 @@ Route::filter('csrf', function () {
 |
 */
 Route::filter('admin', function() {
-    if (Auth::guest()) {
-        return Redirect::guest('signin')
-            ->with('message', '请先登录');
-    }
-    else if (!Auth::user()->is_admin) {
-        return Redirect::intended('/')
-            ->with('message', '无权限访问');
+    if (Auth::guest() || !Auth::user()->isAdmin()) {
+        return Redirect::to('/');
     }
 });

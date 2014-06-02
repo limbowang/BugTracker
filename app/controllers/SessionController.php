@@ -52,7 +52,7 @@ class SessionController extends \BaseController {
             return Redirect::to('signin')
                 ->withErrors($validator);
         } else if (Auth::attempt($inputs, $isRemember)) {
-            return Redirect::intended('/')
+            return Redirect::back()
                 ->with(array('message' => '登陆成功'));
         } else {
             return Redirect::to('signin')

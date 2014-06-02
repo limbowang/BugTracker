@@ -31,6 +31,6 @@ Route::resource('bbs', 'BbsController');
 Route::resource('comment', 'CommentController');
 Route::resource('reply', 'ReplyController');
 
-Route::controller('/', 'DashboardController');
 Route::controller('admin', 'AdminController');
+Route::controller('/', 'DashboardController');
 

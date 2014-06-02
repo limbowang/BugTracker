@@ -101,8 +101,15 @@ class CommentController extends \BaseController {
 	public function destroy($id)
 	{
 		//
-        if (Comment::find($id))
-            Comment::destroy($id);
+        $comment = Comment::find($id);
+        if (empty($comment)) {
+            Session::flash('error', '该评论不存在');
+        } else if ($comment->user_id != Auth::id() && !Auth::user()->is_admin) {
+            Session::flash('error', '无法删除该评论');
+        } else {
+            $comment->delete();
+            Session::flash('message', '删除成功');
+        }
         return Redirect::back();
 	}
 

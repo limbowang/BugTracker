@@ -500,7 +500,7 @@ ul, ol {
 
 /* for dashboard */
 .dashboard {
-    width: 70%;
+    width: 80%;
     float: left;
     margin-bottom: 20px;
 }
@@ -532,6 +532,7 @@ ul, ol {
 
 .dashboard .lists .list-item .list-item-content {
     padding-top: 10px;
+    word-break: break-all;
 }
 
 .dashboard .lists .list-item .list-item-content .status {
@@ -563,4 +564,17 @@ ul, ol {
 
 .dashboard .form-horizontal {
     padding-top: 20px;
+}
+
+.dashboard .table {
+    font-size: 14px;
+}
+
+.dashboard .table td {
+    max-width: 80px;
+    word-break: break-all;
+}
+
+.dashboard-sidebar {
+    width: 20% ! important;
 }

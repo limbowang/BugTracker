@@ -21,22 +21,29 @@ class BugController extends BaseController {
     public function index() {
         //
         $bugs = null;
+        $sort = 'new';
         if (Input::has('sort')) {
             $sort = Input::get('sort');
             if ($sort == 'pop') {
                 $bugs = Bug::orderBy('read_count', 'desc')->paginate(self::PAGE_NUMBER);
             } else if ($sort == 'most-commented') {
-
+                $cols = array('bug.id', 'name', 'software', 'os', 'bug.user_id', 'bug.created_at', DB::raw('count(bug_comment.id) as cnt'));
+                $bugs = Bug::leftJoin('bug_comment', 'bug.id', '=', 'bug_comment.bug_id')
+                    ->groupBy('bug.id')
+                    ->orderBy('cnt', 'desc')
+                    ->orderBy('bug.created_at', 'desc')
+                    ->paginate(self::PAGE_NUMBER, $cols);
+            } else {
+                $bugs = Bug::orderBy('created_at', 'desc')->paginate(self::PAGE_NUMBER);
             }
         } else {
             $bugs = Bug::orderBy('created_at', 'desc')->paginate(self::PAGE_NUMBER);
         }
-        $bugs = Bug::paginate(self::PAGE_NUMBER);
-        $totalPage = Bug::count() / self::PAGE_NUMBER + 1;
         $this->layout->title = '漏洞';
         $this->layout->content = View::make('bug.index')
             ->with('bugs', $bugs)
-            ->with('total', $totalPage);
+            ->with('sort', $sort)
+            ->with('sortlist', array('new' => '最新', 'pop' => '最热门', 'most-commented' => '评论最多'));
     }
 
 
@@ -127,7 +134,9 @@ class BugController extends BaseController {
                 'bug' => $bug,
                 'page' => $page,
                 'comments' => $comments,
-                'comment_start' => self::PAGE_NUMBER * ($page - 1)
+                'comment_start' => self::PAGE_NUMBER * ($page - 1),
+                'latest_bugs' => Bug::orderBy('created_at', 'desc')->limit(self::SIDEBAR_LIMITS)->get(),
+                'hottest_bugs' => Bug::orderBy('read_count', 'desc')->limit(self::SIDEBAR_LIMITS)->get()
             ));
         }
     }
@@ -219,8 +228,15 @@ class BugController extends BaseController {
      */
     public function destroy($id) {
         //
-        if (Bug::find($id))
-            Bug::destroy($id);
+        $bug = Bug::find($id);
+        if (empty($bug)) {
+            Session::flash('error', '该漏洞不存在');
+        }  else if ($bug->user_id != Auth::id() && !Auth::user()->isAdmin()) {
+            Session::flash('error', '无法删除该贴');
+        } else {
+            $bug->delete();
+            Session::flash('message', '删除成功');
+        };
         return Redirect::back();
     }
 }

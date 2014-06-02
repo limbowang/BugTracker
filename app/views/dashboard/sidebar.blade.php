@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar dashboard-sidebar">
     <ul class="categories">
         <li class="category"><a href="/profile">个人资料</a></li>
         <li class="category"><a href="/security">安全与密码</a></li>

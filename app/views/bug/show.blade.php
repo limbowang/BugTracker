@@ -126,25 +126,27 @@
 
     <div class="sidebar">
         <div class="box">
-            <div class="title">相关讨论</div>
+            <div class="title">最新漏洞</div>
             <ul class="content">
-                <li><a href="#">测试话题1</a></li>
-                <li><a href="#">测试话题2</a></li>
-                <li><a href="#">测试话题3</a></li>
-                <li><a href="#">测试话题4</a></li>
-                <li><a href="#">测试话题5</a></li>
-                <li><a href="#">测试话题6</a></li>
+                @if ($latest_bugs->count() == 0)
+                <li>暂无漏洞</li>
+                @else
+                @foreach($latest_bugs as $bug)
+                <li>{{ HTML::link('/bug/' . $bug->id, $bug->name) }}</li>
+                @endforeach
+                @endif
             </ul>
         </div>
         <div class="box">
-            <div class="title">话题</div>
+            <div class="title">热门</div>
             <ul class="content">
-                <li><a href="#">测试话题1</a></li>
-                <li><a href="#">测试话题2</a></li>
-                <li><a href="#">测试话题3</a></li>
-                <li><a href="#">测试话题4</a></li>
-                <li><a href="#">测试话题5</a></li>
-                <li><a href="#">测试话题6</a></li>
+                @if ($hottest_bugs->count() == 0)
+                <li>暂无漏洞</li>
+                @else
+                @foreach($hottest_bugs as $bug)
+                <li>{{ HTML::link('/bug/' . $bug->id, $bug->name) }}</li>
+                @endforeach
+                @endif
             </ul>
         </div>
     </div>

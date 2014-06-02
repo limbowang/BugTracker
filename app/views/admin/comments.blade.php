@@ -3,36 +3,39 @@
 @section('admin')
 
 <div class="dashboard">
-    <div class="dashboard-header">所有用户</div>
+    <div class="dashboard-header">所有评论</div>
     <div class="dashboard-content">
-        @if (count($users) == 0)
-        <span class="no-list">暂无用户</span>
+        @if ($comments->count() == 0)
+        <span class="no-list">暂无评论</span>
         @else
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>编号</th>
-                <th>用户名</th>
-                <th>邮箱</th>
-                <th>注册时间</th>
-                <th>管理员</th>
+                <th>内容</th>
+                <th>相关漏洞</th>
+                <th>发布人</th>
+                <th>发布时间</th>
                 <th>操作</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($comments as $comment)
             <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ HTML::link('/user/' . $user->id, $user->username) }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->created_at }}</td>
-                <td>{{ $user->isAdmin() ? '是' : '否' }}</td>
+                <td>{{ $comment->id }}</td>
+                <td>{{ $comment->content }}</td>
+                <td>{{ HTML::link('/bug/' . $comment->bug->id, $comment->bug->name) }}</td>
+                <td>{{ $comment->user->username }}</td>
+                <td>{{ $comment->created_at }}</td>
                 <td>
-<!--                    <span>提升为管理员</span>-->
-                    @if (!$user->isAdmin())
+                    @if ($comment->trashed())
+                    <span>
+                        恢复
+                    </span>
+                    @else
                     <span>
                         <a href="javascript:void(0);" class="btn-delete" data-toggle="modal" data-target="#modal-delete"
-                           data-item-id="user-{{ $user->id }}" data-item-title="{{ $user->username }}">删除</a>
+                           data-item-id="content-{{ $comment->id }}" data-item-title="{{ $comment->content }}">删除</a>
                     </span>
                     @endif
                 </td>
@@ -40,7 +43,7 @@
             @endforeach
             </tbody>
         </table>
-        {{ $users->links() }}
+        {{ $comments->links() }}
         @endif
     </div>
 </div>

@@ -3,13 +3,15 @@
 
 class BbsController extends \BaseController {
 
+    protected $curTopic = null;
+
     /**
      * Instantiate a new BbsController instance.
      */
     public function __construct() {
         $this->beforeFilter('auth', array('except' => array('index', 'show')));
         $this->beforeFilter('csrf', array('on' => 'post'));
-        $this->beforeFilter(function() {
+        $this->beforeFilter(function () {
 
         }, array('only' => array('update', 'edit', 'destroy')));
     }
@@ -21,12 +23,36 @@ class BbsController extends \BaseController {
      */
     public function index() {
         //
-        $posts = Post::orderBy('is_top', 'desc')->orderBy('created_at', 'desc')->paginate(self::PAGE_NUMBER);
-        $totalPage = Post::count() / self::PAGE_NUMBER + 1;
+        $posts = null;
+        $sort = Input::get('sort');
+        $this->curTopic = $topic = Input::get('topic');
+        $sortlist = array('' => '默认', 'new' => '最新的', 'pop' => '最热门的');
+        if (empty($topic)) {
+            $posts = Post::with('topic');
+        } else {
+            $posts = Post::with('topic')->whereHas('topic', function($query) {
+                $query->where('name', '=', $this->curTopic);
+            });
+        }
+        if (empty($sort)) {
+            $posts = $posts->orderBy('is_top', 'desc')->orderBy('bbs_post.created_at', 'desc');
+        } else if ($sort == 'new') {
+            $posts = $posts->orderBy('bbs_post.created_at', 'desc');
+        } else if ($sort == 'pop') {
+            $posts = $posts->orderBy('read_count', 'desc');
+        }
+        $posts = $posts->paginate(self::PAGE_NUMBER);
+        if ($posts->count() == 0) {
+            Session::flash('message', '暂时没有相关的帖子');
+            return Redirect::to('/bbs');
+        }
         $this->layout->title = '讨论';
-        $this->layout->content = View::make('bbs.index')
-            ->with('posts', $posts)
-            ->with('total', $totalPage);
+        $this->layout->content = View::make('bbs.index')->with(array(
+            'posts' => $posts,
+            'sort' => $sort,
+            'topic' => $topic,
+            'sortlist' => $sortlist
+        ));
     }
 
 
@@ -89,26 +115,25 @@ class BbsController extends \BaseController {
      */
     public function show($id) {
         //
-        $post = Post::with(array('replies' => function($query) {
+        $post = Post::with(array('replies' => function ($query) {
                 $query->withTrashed();
             }))->find($id);
         if (empty($post)) {
-            $page = Input::has('page') ? Input::get('page') : 1;
-            $this->layout->title = '错误';
-            $this->layout->content = View::make('bbs.show')
-                ->with('post', $post)
-                ->with('all_topics', Topic::all());
+            Session::flash('error', '该帖子不存在或已被删除');
+            return Redirect::to('/bbs');
         } else {
             $post->read_count += 1;
             $post->save();
             $page = Input::has('page') ? Input::get('page') : 1;
             $replies = Reply::where('post_id', '=', $id)->withTrashed()->paginate(self::PAGE_NUMBER);
             $this->layout->title = $post->title;
-            $this->layout->content = View::make('bbs.show')
-                ->with('post', $post)
-                ->with('replies', $replies)
-                ->with('reply_start', self::PAGE_NUMBER * ($page - 1))
-                ->with('all_topics', Topic::all());
+            $this->layout->content = View::make('bbs.show')->with(array(
+                'post' => $post,
+                'replies' => $replies,
+                'reply_start' => self::PAGE_NUMBER * ($page - 1),
+                'all_topics' => Topic::all(),
+                'related_posts' => Post::where('topic_id', '=', $post->id)->limit(self::SIDEBAR_LIMITS)->get()
+            ));
         }
     }
 
@@ -194,14 +219,12 @@ class BbsController extends \BaseController {
         $post = Post::find($id);
         if (empty($post)) {
             Session::flash('error', '该帖子不存在');
-            return Redirect::back();
         } else if ($post->user_id != Auth::id() && !Auth::user()->is_admin) {
             Session::flash('error', '无法删除该贴');
-            return Redirect::back();
         } else {
-            $result = Post::destroy($id);
+            $post->delete();
             Session::flash('message', '删除成功');
-            return Redirect::back();
         }
+        return Redirect::back();
     }
 }

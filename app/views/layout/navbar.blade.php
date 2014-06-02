@@ -36,6 +36,10 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        @if (Auth::user()->isAdmin())
+                        <li>{{ HTML::link('admin', '管理') }}</li>
+                        <li class="divider"></li>
+                        @endif
                         <li>{{ HTML::link('profile', '个人资料') }}</li>
                         <li>{{ HTML::link('security', '安全与密码') }}</li>
                         <li class="divider"></li>

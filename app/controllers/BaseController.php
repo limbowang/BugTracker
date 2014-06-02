@@ -12,6 +12,8 @@ class BaseController extends Controller {
 
     const PAGE_NUMBER = 15;
 
+    const SIDEBAR_LIMITS = 5;
+
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))

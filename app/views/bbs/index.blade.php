@@ -7,15 +7,23 @@
             <div class="sorts">
                 <span class="lb">查看：</span>
                 <ul>
+                    @foreach($sortlist as $sortkey=>$sortname)
+                    @if ($sort == $sortkey)
                     <li class="active">
-                        默认
+                        {{ $sortname }}
                     </li>
+                    @else
                     <li class="">
-                        <a href="#">最新</a>
+                        @if (empty($sortkey))
+                        <a href="{{ URL::full() == URL::current() ? URL::full() . '?sort=' . $sortkey : URL::full() . '&sort=' . $sortkey }}">{{
+                            $sortname }}</a>
+                        @else
+                        <a href="{{ URL::full() == URL::current() ? URL::full() . '?sort=' . $sortkey : URL::full() . '&sort=' . $sortkey }}">{{
+                            $sortname }}</a>
+                        @endif
                     </li>
-                    <li class="">
-                        <a href="#">最热门</a>
-                    </li>
+                    @endif
+                    @endforeach
                 </ul>
             </div>
         </div>
@@ -42,7 +50,7 @@
                 </div>
             </li>
             @endforeach
-            {{ $posts->links() }}
+            {{ $posts->appends(array('sort' => $sort, 'topic' => $topic))->links() }}
         </ul>
     </div>
     <div class="sidebar">
@@ -55,7 +63,7 @@
             <div class="title">话题</div>
             <ul class="content">
                 @foreach(Topic::all() as $topic)
-                <li>{{ HTML::link('#', $topic->name) }}</li>
+                <li>{{ HTML::link('bbs?topic=' . $topic->name, $topic->name) }}</li>
                 @endforeach
             </ul>
         </div>

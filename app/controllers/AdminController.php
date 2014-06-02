@@ -90,4 +90,18 @@ class AdminController extends BaseController {
             'replies' => $replies
         ));
     }
+
+    /**
+     * Display a listing of the topics.
+     *
+     * @return Response
+     */
+    public function getTopics() {
+        $topics = Topic::with('posts')
+            ->paginate(self::PAGE_NUMBER);
+        $this->layout->title = '所有话题';
+        $this->layout->content = View::make('admin.topics')->with(array(
+            'topics' => $topics
+        ));
+    }
 } 

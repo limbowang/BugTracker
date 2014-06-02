@@ -566,6 +566,19 @@ ul, ol {
     padding-top: 20px;
 }
 
+.dashboard .form-horizontal-xs {
+    display: inline;
+    margin-left: 20px;
+}
+
+.dashboard .form-horizontal-xs input[name='name'] {
+    display: inline;
+    padding: 5px;
+    width: 200px;
+    height: 30px;
+    font-size: 12px;
+}
+
 .dashboard .table {
     font-size: 14px;
 }

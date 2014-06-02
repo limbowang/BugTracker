@@ -30,6 +30,7 @@ Route::resource('bug', 'BugController');
 Route::resource('bbs', 'BbsController');
 Route::resource('comment', 'CommentController');
 Route::resource('reply', 'ReplyController');
+Route::resource('topic', 'TopicController');
 
 Route::controller('admin', 'AdminController');
 Route::controller('/', 'DashboardController');

@@ -16,6 +16,7 @@
             <ul class="categories">
                 <li class="category"><a href="/admin/posts">所有帖子</a></li>
                 <li class="category"><a href="/admin/replies">所有回复</a></li>
+                <li class="category"><a href="/admin/topics">所有话题</a></li>
             </ul>
         </li>
     </ul>

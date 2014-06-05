@@ -4,11 +4,6 @@
 <div class="content">
 
     <div class="bug-panel">
-        @if (empty($bug))
-        <div class="alert alert-warning">
-            该漏洞不存在或已被删除
-        </div>
-        @else
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">漏洞概要</h3>
@@ -32,7 +27,7 @@
                 </div>
                 <div>
                     <span>漏洞作者：</span>
-                    <span>{{ $bug->user->username }}</span>
+                    <span>{{ HTML::link('/user/' . $bug->user->id, $bug->user->username) }}</span>
                 </div>
                 <div>
                     <span>发布时间：</span>
@@ -60,10 +55,11 @@
                 <h3 class="panel-title">漏洞贴图</h3>
             </div>
             <div class="panel-body">
-                <img src="{{ $bug->img }}" alt=""/>
+                <div>
+                    {{ HTML::image($bug->img, $bug->title) }}
+                </div>
             </div>
         </div>
-        @endif
 
         @if (($count = count($comments)) == 0)
         <div id='comments' class="no-comments">
@@ -86,7 +82,7 @@
                 <li class="comment-list-item">
                     <div class="avatar">
                         <a href="{{ 'user/' . $comment->user->id }}">
-                            <img src="{{ $comment->user->avatar or '/images/default.jpg'}}" alt=""/>
+                            {{ HTML::image($comment->user->avatar ? $comment->user->avatar : '/images/default.jpg', '') }}
                         </a>
                     </div>
                     <div class="title">

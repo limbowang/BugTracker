@@ -12,7 +12,7 @@
             <div class="topic-header">
                 <div class="avatar">
                     <a href="{{ '/user/' . $post->user->id }}">
-                        <img src="{{ $post->user->avatar or  '/images/default.jpg'}}" alt=""/>
+                        {{ HTML::image($post->user->avatar ? $post->user->avatar : '/images/default.jpg', '') }}
                     </a>
                 </div>
                 <div class="title">
@@ -49,7 +49,7 @@
                     <li class="reply-list-item">
                         <div class="avatar">
                             <a href="{{ '/user/' . $reply->user->id }}">
-                                <img src="{{ $reply->user->avatar or asset('/images/default.jpg')}}" alt=""/>
+                                {{ HTML::image($reply->user->avatar ? $reply->user->avatar : '/images/default.jpg', '') }}
                             </a>
                         </div>
                         <div class="title">

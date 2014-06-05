@@ -23,7 +23,7 @@ class CreateBugTable extends Migration {
             $table->string('software');
             $table->enum('level', array('high', 'middle', 'low'));
             $table->string('tag')->nullable();
-            $table->string('img', 40)->nullable();
+            $table->string('img', 60)->nullable();
             $table->integer('read_count')->default(0);
             $table->timestamps();
 

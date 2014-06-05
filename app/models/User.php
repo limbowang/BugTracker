@@ -98,4 +98,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function isAdmin() {
         return $this->is_admin;
     }
+
+    public function bugs() {
+        return $this->hasMany('bug');
+    }
+
+    public function comments() {
+        return $this->hasMany('comment');
+    }
+
+    public function posts() {
+        return $this->hasMany('post');
+    }
+
+    public function replies() {
+        return $this->hasMany('reply');
+    }
 }

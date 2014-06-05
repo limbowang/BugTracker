@@ -27,12 +27,15 @@
                 </ul>
             </div>
         </div>
+        @if ($posts->count() == 0)
+        <div class="well text-center">论坛暂无帖子</div>
+        @else
         <ul class="topics-stream">
             @foreach($posts as $post)
             <li class="topics-stream-item">
                 <div class="avatar">
                     <a href="{{ '/user/' . $post->user->id }}">
-                        <img src="{{ $post->user->avatar or  '/images/default.jpg'}}" alt=""/>
+                        {{ HTML::image($post->user->avatar ? $post->user->avatar : '/images/default.jpg', '') }}
                     </a>
                 </div>
                 <div class="title">
@@ -52,19 +55,24 @@
             @endforeach
             {{ $posts->appends(array('sort' => $sort, 'topic' => $topic))->links() }}
         </ul>
+        @endif
     </div>
     <div class="sidebar">
         @if (Auth::check())
         <div class="box">
-            <a class="btn btn-warning" href="/bbs/create">发表新帖</a>
+            {{ HTML::link('/bbs/create', '发表新帖', array('class' => 'btn btn-warning')) }}
         </div>
         @endif
         <div class="box">
             <div class="title">话题</div>
             <ul class="content">
+                @if (Topic::count() == 0)
+                <li>暂无话题</li>
+                @else
                 @foreach(Topic::all() as $topic)
                 <li>{{ HTML::link('bbs?topic=' . $topic->name, $topic->name) }}</li>
                 @endforeach
+                @endif
             </ul>
         </div>
         <div class="box">

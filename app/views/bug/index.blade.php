@@ -16,7 +16,7 @@
                 </li>
                 @else
                 <li class="">
-                    <a href="/bug?sort={{ $sortkey }}">{{ $sortname }}</a>
+                    {{ HTML::link('/bug?sort=' . $sortkey, $sortname) }}
                 </li>
                 @endif
                 @endforeach
@@ -29,6 +29,9 @@
         </div>
         <div class="clearfix"></div>
     </div>
+    @if ($bugs->count() == 0)
+    <div class="well text-center">暂无漏洞</div>
+    @else
     <table class="table table-hover table-bordered">
         <thead>
         <tr class="success">
@@ -44,11 +47,12 @@
             <td>{{ $bug->created_at }}</td>
             <td>{{ HTML::link('/bug/' . $bug->id, $bug->name) }}</td>
             <td>{{ $bug->software }}</td>
-            <td>{{ $bug->user->username }}</td>
+            <td>{{ HTML::link('/user/' . $bug->user->id, $bug->user->username) }}</td>
         </tr>
         @endforeach
         </tbody>
     </table>
     {{ $bugs->appends(array('sort' => $sort))->links() }}
+    @endif
 </div>
 @stop

@@ -1,24 +1,41 @@
 <div class="sidebar dashboard-sidebar">
     <ul class="categories">
-        <li class="category"><a href="/profile">个人资料</a></li>
-        <li class="category"><a href="/security">安全与密码</a></li>
         <li class="category">
-            <a href="/mybugs">关于漏洞</a>
+            {{ HTML::link('/profile', '个人资料') }}
+        </li>
+        <li class="category">
+            {{ HTML::link('/security', '安全与密码') }}
+        </li>
+        <li class="category">
+            {{ HTML::link('/mybugs', '关于漏洞') }}
         </li>
         <li class="category">
             <ul class="categories">
-                <li class="category"><a href="/mybugs">我的漏洞</a></li>
-                <li class="category"><a href="/comments-received">收到的评论</a></li>
-                <li class="category"><a href="/mycomments">我的评论</a></li>
+                <li class="category">
+                    {{ HTML::link('/mybugs', '我的漏洞') }}
+                </li>
+                <li class="category">
+                    {{ HTML::link('/comments-received', '收到的评论') }}
+                </li>
+                <li class="category">
+                    {{ HTML::link('/mycomments', '我的评论') }}
+                </li>
             </ul>
         </li>
-        <li class="category"><a href="/myposts">关于讨论</a>
+        <li class="category">
+            {{ HTML::link('/myposts', '关于讨论') }}
         </li>
         <li class="category">
             <ul class="categories">
-                <li class="category"><a href="/myposts">我的帖子</a></li>
-                <li class="category"><a href="/replies-received">收到的回复</a></li>
-                <li class="category"><a href="/myreplies">我的回复</a></li>
+                <li class="category">
+                    {{ HTML::link('/myposts', '我的帖子') }}
+                </li>
+                <li class="category">
+                    {{ HTML::link('/replies-received', '收到的回复') }}
+                </li>
+                <li class="category">
+                    {{ HTML::link('/myreplies', '我的回复') }}
+                </li>
             </ul>
         </li>
     </ul>

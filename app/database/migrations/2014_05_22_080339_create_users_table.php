@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration {
             $table->string('password', 60);
             $table->string('email', 80);
             $table->boolean('is_admin')->defalult(false);
-            $table->string('avatar')->nullable();
+            $table->string('avatar', 60)->nullable();
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
             $table->dateTime('last_login_at')->nullable();

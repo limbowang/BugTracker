@@ -2,10 +2,6 @@
 
 @section('content')
 
-@if (Session::has('message'))
-<div class="alert alert-info">{{ Session::get('message') }}</div>
-@endif
-
 {{ Form::open(array('url' => '/session', 'class' => 'form-container signin-form')) }}
 
 <div class="form-group">

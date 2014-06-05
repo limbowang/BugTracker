@@ -101,7 +101,7 @@ class BugController extends BaseController {
             $bug->save();
 
             // redirect
-            Session::flash('message', 'Successfully created bug!');
+            Session::flash('message', '发布漏洞成功');
             return Redirect::to('bug/' . $bug->id);
         }
     }
@@ -117,19 +117,14 @@ class BugController extends BaseController {
         //
         $bug = Bug::find($id);
         if (empty($bug)) {
-            $page = Input::has('page') ? Input::get('page') : 1;
-            $this->layout->title = '错误';
-            $this->layout->content = View::make('bug.show')->with(array(
-                'bug' => $bug,
-                'comment_start' => self::PAGE_NUMBER * ($page - 1)
-            ));
+            Session::flash('error', '该漏洞不存在或已被删除');
+            return Redirect::to('/bug');
         } else {
             $bug->read_count += 1;
             $bug->save();
             $page = Input::has('page') ? Input::get('page') : 1;
             $comments = Comment::where('bug_id', '=', $id)->withTrashed()->paginate(self::PAGE_NUMBER);
             $this->layout->title = $bug->name;
-            $s = new Comment;
             $this->layout->content = View::make('bug.show')->with(array(
                 'bug' => $bug,
                 'page' => $page,

@@ -11,9 +11,6 @@ class BbsController extends \BaseController {
     public function __construct() {
         $this->beforeFilter('auth', array('except' => array('index', 'show')));
         $this->beforeFilter('csrf', array('on' => 'post'));
-        $this->beforeFilter(function () {
-
-        }, array('only' => array('update', 'edit', 'destroy')));
     }
 
     /**
@@ -42,10 +39,6 @@ class BbsController extends \BaseController {
             $posts = $posts->orderBy('read_count', 'desc');
         }
         $posts = $posts->paginate(self::PAGE_NUMBER);
-        if ($posts->count() == 0) {
-            Session::flash('message', '暂时没有相关的帖子');
-            return Redirect::to('/bbs');
-        }
         $this->layout->title = '讨论';
         $this->layout->content = View::make('bbs.index')->with(array(
             'posts' => $posts,
@@ -101,7 +94,7 @@ class BbsController extends \BaseController {
             $post->save();
 
             // redirect
-            Session::flash('message', 'Successfully created post!');
+            Session::flash('message', '新帖成功发布!');
             return Redirect::to('bbs/' . $post->id);
         }
     }

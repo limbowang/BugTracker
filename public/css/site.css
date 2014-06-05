@@ -41,7 +41,7 @@ ul, ol {
     padding-top: 140px;
     padding-bottom: 200px;
     margin-bottom: 30px;
-    background-color: #3498DB;
+    background-color: #3467A2;
     color: #ffffff;
 }
 
@@ -295,6 +295,7 @@ ul, ol {
 
 .topic > .replies .reply-list .reply-list-item .content {
     margin: 0;
+    font-size: 15px;
     word-wrap: break-word;
 }
 
@@ -590,4 +591,90 @@ ul, ol {
 
 .dashboard-sidebar {
     width: 20% ! important;
+}
+
+/* for search */
+.search-box {
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.search-box .sorts {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 15px;
+}
+
+.search-box .sorts .sort-item {
+    display: inline;
+    margin-right: 10px;
+}
+
+.search-box .form-group {
+    padding-left: 0;
+}
+
+.search-content {
+    width: 70%;
+    float: left;
+    margin-bottom: 20px;
+}
+.search-content em {
+    font-style: normal;
+    color: #E74C3C;
+}
+
+.search-content .search-list .search-list-item {
+    padding: 10px 10px 10px 80px;
+    border-bottom: solid 1px #ECF0F1;
+}
+
+.search-list-item.no-avatar {
+    padding-left: 0 ! important;
+}
+
+.search-list-item .avatar img {
+    float: left;
+    width: 60px;
+    height: 60px;
+    margin-left: -70px;
+}
+
+.search-list-item .title {
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.search-list-item .description {
+    font-size: 12px;
+}
+
+.search-list-item .description a {
+    color: #95A5A6;
+}
+
+.search-list-item .description .tag > a {
+    color: #ffffff;
+}
+
+.search-list-item .description .user-info {
+
+}
+
+.search-list-item .description .user-info > li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.search-list-item .description span + span:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "\00b7";
+}
+
+.search-list-item .item-content {
+    padding: 0;
+    color: #BDC3C7;
+    font-size: 15px;
+    word-break: break-all;
 }

@@ -18,12 +18,12 @@ class UserController extends BaseController {
      *
      * @return Response
      */
-    public function index() {
-        // get all users
-        $users = User::all();
-        $this->layout->title = '所有用户';
-        $this->layout->content = View::make('user.index')->with('users', $users);
-    }
+//    public function index() {
+//        // get all users
+//        $users = User::all();
+//        $this->layout->title = '所有用户';
+//        $this->layout->content = View::make('user.index')->with('users', $users);
+//    }
 
 
     /**
@@ -72,7 +72,7 @@ class UserController extends BaseController {
             // redirect
             Session::flash('message', 'Successfully created nerd!');
             Auth::loginUsingId($user->id);
-            return Redirect::to('user');
+            return Redirect::back();
         }
     }
 

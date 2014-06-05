@@ -7,34 +7,38 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">BugTracker</a>
+            {{ HTML::link('/', 'BugTracker', array('class' => 'navbar-brand')) }}
         </div>
         <nav class="collapse navbar-collapse" id="navbar-collapse-01">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="/">主页</a>
+                    {{ HTML::link('/', '主页') }}
                 </li>
                 <li>
-                    <a href="/bug">漏洞</a>
+                    {{ HTML::link('/bug', '漏洞') }}
                 </li>
                 <li>
                     <a href="#">排名</a>
                 </li>
                 <li>
-                    <a href="/bbs">讨论</a>
+                    {{ HTML::link('/bbs', '讨论') }}
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <form class="navbar-form navbar-right" role="search">
+                    {{ Form::open(array('url' => '/search', 'class' => 'navbar-form navbar-right', 'role' => 'search', 'method' => 'GET')) }}
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="搜索">
+                            <input type="text" name="keyword" class="form-control" placeholder="搜索">
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </li>
                 @if (Auth::check())
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->username }}<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{ HTML::image(Auth::user()->avatar ? Auth::user()->avatar : '/images/default.jpg', '', array('class'=> 'img-circle')) }}
+                        {{ Auth::user()->username }}
+                        <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu">
                         @if (Auth::user()->isAdmin())
                         <li>{{ HTML::link('admin', '管理') }}</li>
@@ -56,10 +60,10 @@
                 </li>
                 @else
                 <li>
-                    <a href="/signin">登陆</a>
+                    {{ HTML::link('/signin', '登陆') }}
                 </li>
                 <li>
-                    <a href="/signup">注册</a>
+                    {{ HTML::link('/signup', '注册') }}
                 </li>
                 @endif
 

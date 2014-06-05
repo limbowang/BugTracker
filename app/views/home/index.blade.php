@@ -36,8 +36,7 @@
 
     <div class="col-xs-4">
         <div class="tile">
-            {{ HTML::image('images/icons/svg/loop.svg', 'Infinity-Loop', array('class'=> 'tile-image big-illustration'))
-            }}
+            {{ HTML::image('images/icons/svg/loop.svg', 'Infinity-Loop', array('class'=> 'tile-image big-illustration')) }}
 
             <h3 class="tile-title">Software Ranks</h3>
 

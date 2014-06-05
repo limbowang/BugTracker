@@ -50,7 +50,7 @@ class ReplyController extends \BaseController {
             $reply->post_id = $id;
             $reply->save();
             // redirect
-            Session::flash('message', 'Successfully created reply!' . $id);
+            Session::flash('message', '回复成功');
             return Redirect::to('bbs/' . $id);
         }
 	}

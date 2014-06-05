@@ -2,6 +2,11 @@
 
 class TopicController extends \BaseController {
 
+    public function __construct() {
+        $this->beforeFilter('admin');
+        $this->beforeFilter('csrf', array('on' => 'post'));
+    }
+
 	/**
 	 * Store a newly created resource in storage.
 	 *

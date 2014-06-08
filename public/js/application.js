@@ -119,11 +119,21 @@ String.prototype.repeat = function (num) {
         $uploadBtn.on('click', function () {
             $uploadInput.click();
         });
-        $uploadInput.on('change', function () {
+        $uploadInput.on('change', function (e) {
             var
                 filepath = $(this).val(),
                 filename = filepath.substring(filepath.lastIndexOf('\\') + 1);
             $filename.text(filename);
+
+            // handle image
+            var file = e.target.files.item(0);
+            if ((/^image\/.*$/i.test(file.type))) {
+                var freader = new FileReader();
+                freader.readAsDataURL(file);
+                freader.onload = function(e) {
+                    $('#avatar').attr('src', e.target.result);
+                };
+            }
         });
 
 

@@ -18,7 +18,7 @@
                     {{ HTML::link('/bug', '漏洞') }}
                 </li>
                 <li>
-                    <a href="#">排名</a>
+                    {{ HTML::link('/ranks', '排名') }}
                 </li>
                 <li>
                     {{ HTML::link('/bbs', '讨论') }}

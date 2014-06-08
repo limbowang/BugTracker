@@ -141,6 +141,15 @@ ul, ol {
     font-weight: bold;
 }
 
+.sidebar .box .ranks {
+    padding: 5px 15px;
+    border: solid 1px #ECF0F1;
+}
+
+.sidebar .box .ranks a {
+    padding-left: 5px;
+}
+
 /* for bbs */
 .topics {
     width: 66.6%;
@@ -189,14 +198,14 @@ ul, ol {
 .topics-stream-item {
     border: solid 1px #ECF0F1;
     border-top: 0;
-    padding: 10px 10px 10px 80px;
+    padding: 10px 10px 10px 60px;
 }
 
 .topics-stream-item .avatar img {
     float: left;
-    width: 60px;
-    height: 60px;
-    margin-left: -70px;
+    width: 40px;
+    height: 40px;
+    margin-left: -50px;
 }
 
 .topics-stream-item .title {
@@ -455,6 +464,10 @@ ul, ol {
     margin-bottom: 20px;
 }
 
+.bug-panel .panel-body {
+    word-break: break-all;
+}
+
 .bug-panel > .comments {
     margin-top: 10px;
     background: #ECF0F1;
@@ -677,4 +690,105 @@ ul, ol {
     color: #BDC3C7;
     font-size: 15px;
     word-break: break-all;
+}
+
+/* for rank */
+.rank-panel {
+    width: 66.6%;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.rank-panel .rank-header {
+    padding: 10px;
+    background: #ECF0F1;
+}
+
+.rank-panel .rank-list {
+    padding: 0 20px;
+}
+
+.rank-panel .rank-list li {
+    padding: 10px 0;
+    border-bottom: solid 1px #ECF0F1;
+    clear: both;
+}
+
+.rank-panel .rank-list .rank-badge {
+    float: left;
+    font-size: 30px;
+}
+
+.rank-panel .rank-list .rank-content {
+    padding-left: 50px;
+}
+
+.rank-panel .rank-list .rank-content .title {
+    font-size: 20px;
+}
+
+.rank-panel .rank-list .rank-content .description {
+    font-size: 10px;
+}
+
+
+/* for user profile */
+.user-header {
+
+}
+
+.user-header .avatar {
+    float: left;
+    padding: 10px;
+}
+
+.user-header .avatar img {
+    width: 60px;
+    height: 60px;
+}
+
+.user-header .title {
+    padding-top: 5px;
+    font-size: 25px;
+}
+
+.user-header .description {
+    font-size: 15px;
+}
+
+.user-content {
+    margin-top: 10px;
+}
+
+.user-content .lists {
+
+}
+
+.user-content .lists .list-item {
+    padding: 10px 5px;
+    border-bottom: solid 1px #edeff1;
+}
+
+.user-content .lists .list-item .list-item-content {
+    padding-top: 10px;
+    word-break: break-all;
+}
+
+.user-content .lists .list-item .list-item-content .time {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 13px;
+}
+
+.user-content .lists .list-item .list-item-content .status {
+    font-size: 14px;
+}
+
+.user-content .lists .list-item .list-item-content .quatation {
+    margin-left: 20px;
+}
+
+.user-content .lists .list-item .list-item-content .quatation:before,
+.user-content .lists .list-item .list-item-content .quatation:after {
+    content: '"';
 }

@@ -21,7 +21,7 @@
 
             <div class="well col-sm-5">
                 {{ HTML::image(Auth::user()->avatar ? Auth::user()->avatar : '/images/default.jpg', '', array('class'=>
-                'pull-left')) }}
+                'pull-left', 'id' => 'avatar')) }}
                 <div class="form-upload">
                     <input type="button" class="btn btn-info btn-upload" value="更改"/>
 

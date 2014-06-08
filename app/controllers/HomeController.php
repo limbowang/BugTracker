@@ -56,5 +56,43 @@ class HomeController extends BaseController {
     }
 
     public function getRanks() {
+        $cols = array('bug.id', 'name', 'software', 'os', 'bug.user_id', 'bug.created_at', 'read_count', DB::raw('count(bug_comment.id) as cnt'));
+        $bugs = Bug::leftJoin('bug_comment', 'bug.id', '=', 'bug_comment.bug_id')
+            ->groupBy('bug.id')
+            ->orderBy('cnt', 'desc')
+            ->orderBy('read_count', 'desc')
+            ->orderBy('bug.created_at', 'desc')
+            ->limit(10)
+            ->get($cols);
+
+        $cols = array('user.id', 'username',
+            DB::raw('count(bug.id) as cnt_bug'),
+            DB::raw('count(bbs_post.id) as cnt_post'),
+        );
+        $users = User::leftJoin('bug', 'bug.user_id', '=', 'user.id')
+            ->leftJoin('bbs_post', 'bbs_post.user_id', '=', 'user.id')
+            ->groupBy('user.id')
+            ->orderBy('cnt_bug', 'desc')
+            ->orderBy('cnt_post', 'desc')
+            ->where('user.is_admin', '=', false)
+            ->limit(10)
+            ->get($cols);
+
+        $cols = array(
+            'software',
+            DB::raw('count(bug.id) as cnt')
+        );
+        $softwares = DB::table('bug')
+            ->groupBy('software')
+            ->orderBy('cnt', 'desc')
+            ->limit(10)
+            ->get($cols);
+
+        $this->layout->title = '排名';
+        $this->layout->content = View::make('home.ranks')->with(array(
+            'bugs' => $bugs,
+            'users' => $users,
+            'softwares' => $softwares
+        ));
     }
 }

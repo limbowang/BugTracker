@@ -85,6 +85,40 @@ class UserController extends BaseController {
      */
     public function show($id) {
         //
+        $viewMap = array(
+            'bugs' => 'user.show.bugs',
+            'comments' => 'user.show.comments',
+            'posts' => 'user.show.posts',
+            'replies' => 'user.show.replies'
+        );
+        $cateList = array(
+            'bugs' => '漏洞',
+            'comments' => '评论',
+            'posts' => '帖子',
+            'replies' => '回复'
+        );
+        $user = User::findOrFail($id);
+        $data = null;
+        $category = Input::get('c');
+        if (!in_array($category, array_keys($viewMap))) {
+            $category = 'bugs';
+        }
+        if ($category == 'bugs') {
+            $data = Bug::where('user_id', '=', $user->id)->paginate(self::PAGE_NUMBER);
+        } else if ($category == 'comments') {
+            $data = Comment::where('user_id', '=', $user->id)->paginate(self::PAGE_NUMBER);
+        } else if ($category == 'posts') {
+            $data = Post::where('user_id', '=', $user->id)->paginate(self::PAGE_NUMBER);
+        } else if ($category == 'replies') {
+            $data = Reply::where('user_id', '=', $user->id)->paginate(self::PAGE_NUMBER);
+        }
+        $this->layout->title = $user->username;
+        $this->layout->content = View::make($viewMap[$category])->with(array(
+            'category' => $category,
+            'lists' => $cateList,
+            'user' => $user,
+            'data' => $data
+        ));
     }
 
 

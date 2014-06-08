@@ -22,6 +22,7 @@ Route::post('bbs/{id}/reply', 'ReplyController@store');
 Route::post('bug/{id}/comment', 'CommentController@store');
 Route::get('/', array('uses' => 'HomeController@getIndex'));
 Route::get('/search', array('uses' => 'HomeController@getSearch'));
+Route::get('/ranks', array('uses' => 'HomeController@getRanks'));
 Route::get('/signup', array('uses' => 'UserController@create'));
 Route::get('/signin', array('uses' => 'SessionController@create'));
 Route::get('/logout', array('uses' => 'SessionController@destroy'));

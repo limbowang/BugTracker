@@ -13,6 +13,8 @@
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Carbon\Carbon $deleted_at
+ * @property-read \user $user
+ * @property-read \bug $bug
  */
 
 class Comment extends Eloquent{

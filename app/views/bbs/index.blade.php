@@ -15,11 +15,9 @@
                     @else
                     <li class="">
                         @if (empty($sortkey))
-                        <a href="{{ URL::full() == URL::current() ? URL::full() . '?sort=' . $sortkey : URL::full() . '&sort=' . $sortkey }}">{{
-                            $sortname }}</a>
+                        {{ HTML::link('/bbs', $sortname) }}
                         @else
-                        <a href="{{ URL::full() == URL::current() ? URL::full() . '?sort=' . $sortkey : URL::full() . '&sort=' . $sortkey }}">{{
-                            $sortname }}</a>
+                        {{ HTML::link('/bbs?sort=' . $sortkey, $sortname) }}
                         @endif
                     </li>
                     @endif
@@ -34,7 +32,7 @@
             @foreach($posts as $post)
             <li class="topics-stream-item">
                 <div class="avatar">
-                    <a href="{{ '/user/' . $post->user->id }}">
+                    <a href="{{ URL::to('/user/' . $post->user->id) }}">
                         {{ HTML::image($post->user->avatar ? $post->user->avatar : '/images/default.jpg', '') }}
                     </a>
                 </div>

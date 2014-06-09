@@ -21,11 +21,14 @@
  * @property-read \user $user
  * @property \Carbon\Carbon $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\comment[] $comments
+ * @property string $title
+ * @property string $description
+ * @property-read \Illuminate\Database\Eloquent\Collection|\user[] $users
  */
 
-class Bug extends Eloquent {
+class Activity extends Eloquent {
 
-    protected $table = 'bug';
+    protected $table = 'activity';
 
     protected $softDelete = true;
 
@@ -33,8 +36,7 @@ class Bug extends Eloquent {
         return $this->belongsTo('user');
     }
 
-    public function comments() {
-        return $this->hasMany('comment');
+    public function users() {
+        return $this->belongsToMany('user', 'user_activity');
     }
-
 }

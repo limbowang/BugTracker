@@ -18,6 +18,8 @@ Route::get('user', function() {
     App::abort(404);
 });
 
+//Route::post('activity/{id}/participate', 'ActivityController@participate');
+//Route::post('activity/{id}/leave', 'ActivityController@leave');
 Route::post('bbs/{id}/reply', 'ReplyController@store');
 Route::post('bug/{id}/comment', 'CommentController@store');
 Route::get('/', array('uses' => 'HomeController@getIndex'));
@@ -36,6 +38,7 @@ Route::resource('bbs', 'BbsController');
 Route::resource('comment', 'CommentController');
 Route::resource('reply', 'ReplyController');
 Route::resource('topic', 'TopicController');
+Route::resource('activity', 'ActivityController');
 
 Route::controller('admin', 'AdminController');
 Route::controller('/', 'DashboardController');

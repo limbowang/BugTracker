@@ -189,7 +189,7 @@ class BugController extends BaseController {
             $validator = Validator::make(Input::all(), $rules);
 
             if ($validator->fails()) {
-                return Redirect::to('bug/create')
+                return Redirect::to('bug/edit')
                     ->withErrors($validator)
                     ->withInput();
             } else {

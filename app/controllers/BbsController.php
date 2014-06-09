@@ -24,20 +24,21 @@ class BbsController extends \BaseController {
         $sort = Input::get('sort');
         $this->curTopic = $topic = Input::get('topic');
         $sortlist = array('' => '默认', 'new' => '最新的', 'pop' => '最热门的');
+        $posts = Post::with('topic');
         if (empty($topic)) {
-            $posts = Post::with('topic');
+            if (empty($sort)) {
+                $posts = $posts->orderBy('is_top', 'desc')->orderBy('bbs_post.created_at', 'desc');
+            } else if ($sort == 'new') {
+                $posts = $posts->orderBy('bbs_post.created_at', 'desc');
+            } else if ($sort == 'pop') {
+                $posts = $posts->orderBy('read_count', 'desc');
+            }
         } else {
-            $posts = Post::with('topic')->whereHas('topic', function($query) {
+            $posts =$posts->whereHas('topic', function ($query) {
                 $query->where('name', '=', $this->curTopic);
             });
         }
-        if (empty($sort)) {
-            $posts = $posts->orderBy('is_top', 'desc')->orderBy('bbs_post.created_at', 'desc');
-        } else if ($sort == 'new') {
-            $posts = $posts->orderBy('bbs_post.created_at', 'desc');
-        } else if ($sort == 'pop') {
-            $posts = $posts->orderBy('read_count', 'desc');
-        }
+
         $posts = $posts->paginate(self::PAGE_NUMBER);
         $this->layout->title = '讨论';
         $this->layout->content = View::make('bbs.index')->with(array(
@@ -179,7 +180,7 @@ class BbsController extends \BaseController {
         $validator = Validator::make(Input::all(), $rules);
 
         if ($validator->fails()) {
-            return Redirect::to('bbs/create')
+            return Redirect::to('bbs/edit')
                 ->withErrors($validator)
                 ->withInput();
         } else {

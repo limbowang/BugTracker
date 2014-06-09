@@ -792,3 +792,84 @@ ul, ol {
 .user-content .lists .list-item .list-item-content .quatation:after {
     content: '"';
 }
+
+/* for activity */
+.activities {
+    width: 66.6%;
+    background: #ECF0F1;
+    float: left;
+    margin-bottom: 20px;
+}
+
+.activities-header {
+    background: #ECF0F1;
+    padding: 10px;
+}
+
+.activities-header .sorts {
+    text-align: right;
+    font-size: 15px;
+}
+
+.activities-header .sorts .lb {
+    text-align: right;
+}
+
+.activities-header .sorts > ul {
+    display: inline;
+    padding: 0;
+}
+
+.activities-header .sorts > ul > li {
+    display: inline;
+}
+
+.activities-header .sorts > ul > li + li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+
+.activities-header .sorts > ul > li > a.active {
+    text-decoration: none;
+}
+
+.activities-stream {
+    background: #ffffff;
+}
+
+.activities-stream-item {
+    border: solid 1px #ECF0F1;
+    border-top: 0;
+    padding: 10px 10px 10px 60px;
+}
+
+.activities-stream-item .avatar img {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-left: -50px;
+}
+
+.activities-stream-item .title {
+    font-size: 16px;
+    padding-bottom: 5px;
+}
+
+.activities-stream-item .description {
+    font-size: 12px;
+}
+
+.activities-stream-item .description a {
+    color: #95A5A6;
+}
+
+.activities-stream-item .description .tag > a {
+    color: #ffffff;
+}
+
+.activities-stream-item .description span + span:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "\00b7";
+}

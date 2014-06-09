@@ -18,6 +18,12 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $remember_token
+ * @property \Carbon\Carbon $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\bug[] $bugs
+ * @property-read \Illuminate\Database\Eloquent\Collection|\comment[] $comments
+ * @property-read \Illuminate\Database\Eloquent\Collection|\post[] $posts
+ * @property-read \Illuminate\Database\Eloquent\Collection|\reply[] $replies
+ * @property-read \Illuminate\Database\Eloquent\Collection|\activity[] $activities
  */
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
@@ -113,5 +119,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
     public function replies() {
         return $this->hasMany('reply');
+    }
+
+    public function activities() {
+        return $this->hasMany('activity');
     }
 }

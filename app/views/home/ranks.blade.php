@@ -52,7 +52,7 @@
                         @else
                         <span class="label label-default">{{ $i++ }}</span>
                         @endif
-                    {{ HTML::link('/user' . $user->id, $user->username) }}
+                    {{ HTML::link('/user/' . $user->id, $user->username) }}
                 </li>
                 @endforeach
                 @endif

@@ -25,7 +25,7 @@
             <h3 class="tile-title">关于漏洞</h3>
 
             <p>查看所有用户发布的漏洞</p>
-            <a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">查看更多</a>
+            {{ HTML::link('/bug', '查看更多', array('class' => 'btn btn-primary btn-large btn-block')) }}
         </div>
     </div>
 
@@ -36,7 +36,7 @@
             <h3 class="tile-title">关于排名</h3>
 
             <p>查看当前热门的漏洞、活跃的用户</p>
-            <a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">查看更多</a>
+            {{ HTML::link('/ranks', '查看更多', array('class' => 'btn btn-primary btn-large btn-block')) }}
         </div>
     </div>
 
@@ -46,7 +46,7 @@
             <h3 class="tile-title">关于讨论</h3>
 
             <p>与我们分享你关于漏洞的经历</p>
-            <a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">查看更多</a>
+            {{ HTML::link('/bbs', '查看更多', array('class' => 'btn btn-primary btn-large btn-block')) }}
         </div>
     </div>
 </div>

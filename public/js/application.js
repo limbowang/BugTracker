@@ -140,7 +140,8 @@ String.prototype.repeat = function (num) {
         $('.btn-delete').on('click', function () {
             console.log($(this));
             $('#modalLabel').append('<span> "' + $(this).attr('data-item-title') + '" ?</span>');
-            $('#form-delete').attr('action', '/' + $(this).attr('data-item-id').replace('-', '/'));
+            var url = window.location.href;
+            $('#form-delete').attr('action', url.substring(0, url.indexOf('admin')) + $(this).attr('data-item-id').replace('-', '/'));
         });
     });
 

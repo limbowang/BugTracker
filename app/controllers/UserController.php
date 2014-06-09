@@ -8,7 +8,7 @@ class UserController extends BaseController {
      * Instantiate a new UserController instance.
      */
     public function __construct() {
-        $this->beforeFilter('auth', array('except' => array('create', 'show')));
+        $this->beforeFilter('auth', array('except' => array('create', 'show', 'store')));
         $this->beforeFilter('csrf', array('on' => 'post'));
         $this->beforeFilter('admin', array('only' => array('destroy')));
     }
@@ -70,7 +70,6 @@ class UserController extends BaseController {
             $user->save();
 
             // redirect
-            Session::flash('message', 'Successfully created nerd!');
             Auth::loginUsingId($user->id);
             return Redirect::back();
         }
@@ -221,8 +220,11 @@ class UserController extends BaseController {
         $user = User::find($id);
         if (empty($user)) {
             Session::flash('error', '该用户不存在');
+        } else if (!Auth::user()->is_admin) {
+            Session::flash('error', '无法删除该用户');
         } else {
             $user->delete();
+            Session::flash('message', '删除成功');
         }
         return Redirect::back();
     }

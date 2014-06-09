@@ -24,11 +24,11 @@ class Reply extends Eloquent {
     protected $softDelete = true;
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('\User');
     }
 
     public function post() {
-        return $this->belongsTo('post');
+        return $this->belongsTo('\Post');
     }
 
 }

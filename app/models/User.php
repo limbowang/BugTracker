@@ -106,22 +106,22 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
 
     public function bugs() {
-        return $this->hasMany('bug');
+        return $this->hasMany('\Bug');
     }
 
     public function comments() {
-        return $this->hasMany('comment');
+        return $this->hasMany('\Comment');
     }
 
     public function posts() {
-        return $this->hasMany('post');
+        return $this->hasMany('\Post');
     }
 
     public function replies() {
-        return $this->hasMany('reply');
+        return $this->hasMany('\Reply');
     }
 
     public function activities() {
-        return $this->hasMany('activity');
+        return $this->hasMany('\Activity');
     }
 }

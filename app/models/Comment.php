@@ -24,10 +24,10 @@ class Comment extends Eloquent{
     protected $softDelete = true;
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('\User');
     }
 
     public function bug() {
-        return $this->belongsTo('bug');
+        return $this->belongsTo('\Bug');
     }
 } 

@@ -18,6 +18,6 @@ class Topic extends Eloquent {
     protected $table = 'bbs_topic';
 
     public function posts() {
-        return $this->hasMany('post');
+        return $this->hasMany('\Post');
     }
 } 

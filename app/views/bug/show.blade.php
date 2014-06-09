@@ -60,6 +60,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         @if (($count = count($comments)) == 0)
         <div id='comments' class="no-comments">
@@ -117,7 +118,6 @@
         {{ Form::submit('提交', array('class' => 'btn btn-info btn-lg btn-block')) }}
 
         {{ Form::close() }}
-        @endif
     </div>
 
     <div class="sidebar">

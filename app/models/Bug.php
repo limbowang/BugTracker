@@ -30,11 +30,11 @@ class Bug extends Eloquent {
     protected $softDelete = true;
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('\User');
     }
 
     public function comments() {
-        return $this->hasMany('comment');
+        return $this->hasMany('\Comment');
     }
 
 }

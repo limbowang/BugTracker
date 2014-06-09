@@ -63,6 +63,7 @@
             <div class="clearfix"></div>
         </div>
 
+        @endif
         {{ Form::open(array('url' => URL::current() . '/reply', 'class' => 'form-container')) }}
 
         <div class="form-group">
@@ -74,7 +75,6 @@
         {{ Form::submit('提交', array('class' => 'btn btn-info btn-lg btn-block')) }}
 
         {{ Form::close() }}
-        @endif
     </div>
 
     <div class="sidebar">

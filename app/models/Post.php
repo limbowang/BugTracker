@@ -28,14 +28,14 @@ class Post extends Eloquent {
     protected $softDelete = true;
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('\User');
     }
 
     public function topic() {
-        return $this->belongsTo('topic');
+        return $this->belongsTo('\Topic');
     }
 
     public function replies() {
-        return $this->hasMany('reply');
+        return $this->hasMany('\Reply');
     }
 } 

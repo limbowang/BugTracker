@@ -33,10 +33,10 @@ class Activity extends Eloquent {
     protected $softDelete = true;
 
     public function user() {
-        return $this->belongsTo('user');
+        return $this->belongsTo('\User');
     }
 
     public function users() {
-        return $this->belongsToMany('user', 'user_activity');
+        return $this->belongsToMany('\User', 'user_activity');
     }
 }
